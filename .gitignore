@@ -2,3 +2,4 @@ node_modules/
 .idea/
 .git/
 public/.sass-cache
+*.css
