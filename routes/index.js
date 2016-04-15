@@ -12,7 +12,7 @@ router.get('/login', function (req, res) {
 router.post('/login', function(req, res) {
 
     var loginData = {
-        webmailHost: 'mail.edotgen.com',
+        webmailHost: process.env.WEBMAIL_HOST,
         username: req.body.username,
         password: req.body.password,
         https: true

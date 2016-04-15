@@ -4,7 +4,7 @@ var _db = undefined;
 
 module.exports = {
     connect( callback ) {
-        client.connect('mongodb://localhost:27017/suggestionbox', ( err, db ) => {
+        client.connect( process.env.MONGO_CONNECTION_STRING, ( err, db ) => {
             if (err) {
                 console.log('Error connecting to mongo!');
                 process.exit(1);
