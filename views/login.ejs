@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css" crossorigin="anonymous">
+    <link rel="icon" type="image/png" href="/favicon.png">
+</head>
+<body>
+<h1><%= title %></h1>
+<h2><%= title2 %></h2>
+<p>Please log in</p>
+
+<form method="POST" action="/login">
+    <input name="username" placeholder="Username"><br/>
+    <input name="password" type="password" placeholder="Password">
+    <input type="Submit">
+</form>
+
+<script src="https://code.jquery.com/jquery-2.2.3.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js" crossorigin="anonymous"></script>
+</body>
+</html>
