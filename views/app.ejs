@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="suggestionbox">
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css"
+          crossorigin="anonymous">
+    <link rel="icon" type="image/png" href="/favicon.png">
+</head>
+<body>
+<header>
+    <h1 class="text-center" ><%= title %></h1>
+</header>
+
+<div ng-view></div>
+
+<footer>This is the footer</footer>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular.min.js"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular-route.min.js"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular-resource.min.js"
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="/javascripts/app.js"></script>
+<script type="text/javascript" src="/javascripts/routes.js"></script>
+<script type="text/javascript" src="/javascripts/suggestions-controllers.js"></script>
+<script type="text/javascript" src="/javascripts/suggestions-factory.js"></script>
+</body>
+</html>

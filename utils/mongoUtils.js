@@ -9,10 +9,24 @@ module.exports = {
                 console.log('Error connecting to mongo!');
                 process.exit(1);
             }
+            _db = db;
             callback( db );
         });
     },
     getDb() {
         return _db;
+    },
+    findAll( collection, callback ) {
+        _db.collection( collection ).find({}).toArray( (err, docs) => {
+            if ( err ) {
+                console.error('MONGO ERROR');
+                callback([]);
+            } else {
+                callback(docs);
+            }
+        });
+    },
+    getObjectID( id ) {
+        return new mongo.ObjectID( id );
     }
 };

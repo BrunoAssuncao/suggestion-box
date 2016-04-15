@@ -5,7 +5,7 @@ var loginOnExchange = require('../utils/loginOnExchange');
 
 //login page by GET
 router.get('/login', function (req, res) {
-    res.render('login', {title: 'Suggestion Box Login', title2: 'please log in'});
+    res.render('login', {title: 'Suggestion Box', title2: 'Please Log In'});
 });
 
 //login POST
@@ -31,9 +31,9 @@ router.post('/login', function(req, res) {
 
 });
 
-/* GET home page. */
+/* GET home/app page. */
 router.get('/', function (req, res) {
-    res.render('index', {title:'ola'});
+    res.render('app', {title: 'Suggestion Box'});
 });
 
 module.exports = router;

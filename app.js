@@ -9,8 +9,8 @@ var MongoStore = require('connect-mongo')(session);
 var mongo = require('./utils/mongoUtils');
 var userSession = require('./utils/userSession');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var mainRouter = require('./routes/main');
+var suggestionsRouter = require('./routes/suggestions');
 
 var app = express();
 
@@ -35,8 +35,8 @@ mongo.connect(( db ) => {
     app.use(require('node-compass')({mode: 'expanded'}));
     app.use(express.static(path.join(__dirname, 'public')));
 
-    app.use('/', routes);
-    app.use('/users', users);
+    app.use('/suggestions', suggestionsRouter);
+    app.use('/', mainRouter);
 
 // catch 404 and forward to error handler
     app.use(function (req, res, next) {
