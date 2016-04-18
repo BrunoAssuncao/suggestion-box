@@ -1,9 +1,14 @@
 <h2 ng-show="hasSuggestions()" >Open Suggestions</h2>
 
 <div class="list-group" ng-show="hasSuggestions()">
-    <a class="list-group-item" ng-href="#/suggestion/{{suggestion._id}}" ng-repeat="suggestion in suggestions">
+    <a class="list-group-item" ng-href="#/suggestion/{{suggestion._id}}"
+       ng-repeat="suggestion in suggestions | orderBy:' - likes.length + dislikes.length'">
         <h3 class="list-group-item-heading">{{suggestion.title}}</h3>
         <p class="list-group-item-text">{{suggestion.body}}</p>
+        <p class="list-group-item-text"
+            ng-class="{negative:suggestion.likes.length - suggestion.dislikes.length < 0, positive:suggestion.likes.length - suggestion.dislikes.length > 0}">
+            <small>Score: {{suggestion.likes.length - suggestion.dislikes.length}}</small>
+        </p>
     </a>
 </div>
 

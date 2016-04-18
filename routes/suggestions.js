@@ -11,6 +11,7 @@ function getCollection() {
 //GET ALL SUGGESTIONS
 router.get('/', (req, res) => {
     mongo.findAll(collectionName, (docs) => {
+        docs.username = req.session.username;
         res.json(docs);
     });
 });
@@ -19,6 +20,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     var id = mongo.getObjectID(req.params.id);
     getCollection().find({_id: id}).limit(1).next((err, doc) => {
+        doc.username = req.session.username;
         res.json(doc);
     });
 });

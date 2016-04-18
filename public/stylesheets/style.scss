@@ -11,4 +11,9 @@ body {
 
 a {
   color: #00B7FF;
+
+  p {
+    &.positive { color: darkgreen; }
+    &.negative { color: darkred; }
+  }
 }
