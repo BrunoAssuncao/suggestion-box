@@ -8,20 +8,21 @@
     <link rel="icon" type="image/png" href="/favicon.png">
 </head>
 <body>
-<h1><%= title %></h1>
-<h2><%= title2 %></h2>
 
-<form method="POST" action="/login">
-    <p>
-        <input name="username" placeholder="Username">
-    </p>
-    <p>
-        <input name="password" type="password" placeholder="Password">
-    </p>
-    <p>
-        <input type="Submit">
-    </p>
+<header>
+    <h1 class="text-center" ><%= title %></h1>
+</header>
+
+<form method="POST" action="/login" class="form-signin">
+    <h2 class="form-signin-heading"><%= title2 %></h2>
+    <label for="username" class="sr-only">Username</label>
+    <input id="username" name="username" placeholder="Username">
+    <label for="password" class="sr-only">Password</label>
+    <input id="password" name="password" type="password" placeholder="Password">
+    <button class="btn btn-lg btn-primary btn-block" type="Submit">log in</button>
 </form>
+
+<footer>This is the footer</footer>
 
 <script src="https://code.jquery.com/jquery-2.2.3.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js" crossorigin="anonymous"></script>
