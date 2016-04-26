@@ -28,5 +28,10 @@ module.exports = {
     },
     getObjectID( id ) {
         return new mongo.ObjectID( id );
+    },
+    getMax( collection, field ) {
+        _db.collection( collection ).aggregate( {
+            $max: { $size: field }
+        } );
     }
 };
