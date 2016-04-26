@@ -5,9 +5,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
-var CronJob = require('cron').CronJob;
-
-
 var mongo = require('./utils/mongoUtils');
 var userSession = require('./utils/userSession');
 

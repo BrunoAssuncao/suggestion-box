@@ -11,7 +11,8 @@ function getCollection() {
 
 
 router.get( '/slack', (req, res) => {
-    getCollection().find().sort({"score":-1}).limit(1).next((err, doc) => {
+    console.log("Hi there!");
+    /*getCollection().find().sort({"score":-1}).limit(1).next((err, doc) => {
         var link =  req.protocol + '://' + req.get('host') + '/#/suggestion/'+ doc._id;
         var text = "This is the most voted suggestion: " + doc.title + " - " + link;
 
@@ -27,8 +28,8 @@ router.get( '/slack', (req, res) => {
                 console.log('error: '+ response.statusCode+ ' ' + body);
             }
         });
-         res.end();
-    });
+    });*/
+    res.end();
 });
 
 //GET ALL SUGGESTIONS
