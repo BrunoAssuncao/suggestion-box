@@ -10,7 +10,7 @@ var userSession = require('./utils/userSession');
 
 var mainRouter = require('./routes/main');
 var suggestionsRouter = require('./routes/suggestions');
-
+var slack = require('./utils/slackIntegration');
 
 var app = express();
 

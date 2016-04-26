@@ -7,6 +7,7 @@ require('../config');
 var app = require('../app');
 var debug = require('debug')('suggestionBoxExpress:server');
 var http = require('http');
+var slack = require('../utils/slackIntegration');
 
 /**
  * Get port from environment and store in Express.
@@ -25,7 +26,10 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port, function() {
+    console.log('listening to port ' + port);
+    slack.startJob();
+});
 server.on('error', onError);
 server.on('listening', onListening);
 
