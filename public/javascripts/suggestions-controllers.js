@@ -20,4 +20,13 @@ angular.module('suggestionbox')
         $scope.unvoted = function() {
             return $scope.suggestion.$resolved && !$scope.votedUp() && !$scope.votedDown();
         }
+    })
+
+    .controller('NewSuggestionController', function(Suggestion) {
+        this.suggestion = new Suggestion();
+        this.submitSuggestion = function() {
+            this.suggestion.$save().then(function( suggestion ) {
+                window.location = '#/suggestion/' + suggestion.id;
+            });
+        };
     });

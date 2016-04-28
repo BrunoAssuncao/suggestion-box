@@ -12,7 +12,9 @@ angular.module('suggestionbox')
             controllerAs: 'suggestionsDetailCtrl'
         })
         .when('/new', {
-            templateUrl: 'templates/new.html'
+            templateUrl: 'templates/new.html',
+            controller: 'NewSuggestionController',
+            controllerAs: 'newCtrl'
         })
         .otherwise( { redirectTo: '/' } );
 

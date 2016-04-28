@@ -7,6 +7,43 @@ body {
   header, footer {
     text-align: center;
   }
+
+  .actions {
+    text-align: right;
+  }
+
+  form {
+
+    min-width: 300px;
+    max-width: 80%;
+    margin: 3em auto;
+
+    * {
+      width: 100%;
+    }
+
+    .ng-invalid.ng-dirty {
+      border-color: #FA787E;
+    }
+
+    input {
+      padding: 10px;
+      border: 1px solid lightgray;
+      border-radius: 0.5em 0.5em 0 0;
+      margin-top: 1em;
+    }
+
+    textarea {
+      min-height: 8em;
+      border: 1px solid lightgray;
+      border-radius: 0 0 0.5em 0.5em;
+      border-top: none;
+    }
+
+    [type=submit] {
+      margin-top: 1em;
+    }
+  }
 }
 
 a {

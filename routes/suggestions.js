@@ -74,9 +74,23 @@ router.get('/:id', (req, res) => {
 
 //SUBMIT NEW SUGGESTION
 router.post('/', (req, res) => {
-    mongo.findAll('suggestions', (docs) => {
-        console.log(docs);
-        res.json(docs);
+    getCollection().insert({
+        creator: req.session.username,
+        title: req.body.title,
+        body: req.body.body,
+        likes: [], dislikes: []
+    }, (err, result) => {
+        if ( err ) {
+            console.error(err);
+            res.json(err);
+        } else {
+            if ( result && result.insertedCount === 1 ) {
+                res.status(200);
+                res.json( { id: result.insertedIds[0] } );
+            } else {
+                res.json(result);
+            }
+        }
     });
 });
 

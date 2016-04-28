@@ -1,5 +1,5 @@
 <h2 ng-show="hasSuggestions()" >Open Suggestions</h2>
-
+<p class="actions"><a class="btn btn-primary" ng-href="#/new">New suggestion</a></p>
 <div class="list-group" ng-show="hasSuggestions()">
     <a class="list-group-item" ng-href="#/suggestion/{{suggestion._id}}"
        ng-repeat="suggestion in suggestions | orderBy:' -score'">
