@@ -34,9 +34,28 @@ router.get( '/slack', (req, res) => {
 
 //GET ALL SUGGESTIONS
 router.get('/', (req, res) => {
-    mongo.findAll(collectionName, (docs) => {
-        docs.username = req.session.username;
-        res.json(docs);
+    getCollection().aggregate([
+        {
+            $project : {
+                title: "$title",
+                body: "$body",
+                creator: "$creator",
+                score: { $subtract: [
+                    { $size: { "$ifNull": [ "$likes", [] ] } },
+                    { $size: { "$ifNull": [ "$dislikes", [] ] } }
+                ] }
+            }
+        },
+        {
+            $sort: { "score":-1 }
+        }
+    ]).toArray( (err, docs) => {
+        if ( err ) {
+            console.error(err);
+            res.json(err);
+        } else {
+            res.json(docs);
+        }
     });
 });
 
