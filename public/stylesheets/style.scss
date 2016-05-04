@@ -1,7 +1,7 @@
 @import "compass/css3";
 
 body {
-  padding: 50px;
+  padding: 50px 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 
   header, footer {
@@ -12,10 +12,13 @@ body {
     text-align: right;
   }
 
-  form {
+  .btn {
+      margin: 15px 0;
+  }
 
+  form {
     min-width: 300px;
-    max-width: 80%;
+    //max-width: 80%;
     margin: 3em auto;
 
     * {
@@ -54,4 +57,10 @@ a {
     &.positive { color: darkgreen; }
     &.negative { color: darkred; }
   }
+}
+
+@media (max-width: 720px ) {
+    .btn {
+        width: 100%;
+    }
 }

@@ -1,7 +1,9 @@
-<h2>New Suggestion</h2>
+<div class="row">
+    <h2 class="col-xs-12">New Suggestion</h2>
+</div>
 
-<div>
-    <form name="suggestionForm" ng-submit="suggestionForm.$valid && newCtrl.submitSuggestion()" novalidate>
+<div class="row">
+    <form class="col-xs-12" name="suggestionForm" ng-submit="suggestionForm.$valid && newCtrl.submitSuggestion()" novalidate>
         <label for="title" class="sr-only">Title</label>
         <input id="title" name="title" placeholder="Title" ng-model="newCtrl.suggestion.title" required>
         <label for="body" class="sr-only">Description</label>

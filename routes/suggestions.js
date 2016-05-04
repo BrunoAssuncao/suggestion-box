@@ -35,20 +35,20 @@ router.get( '/slack', (req, res) => {
 //GET ALL SUGGESTIONS
 router.get('/', (req, res) => {
     getCollection().aggregate([
-        {
-            $project : {
-                title: "$title",
-                body: "$body",
-                creator: "$creator",
-                score: { $subtract: [
-                    { $size: { "$ifNull": [ "$likes", [] ] } },
-                    { $size: { "$ifNull": [ "$dislikes", [] ] } }
-                ] }
-            }
-        },
-        {
-            $sort: { "score":-1 }
+    {
+        $project : {
+            title: "$title",
+            body: "$body",
+            creator: "$creator",
+            score: { $subtract: [
+                { $size: { "$ifNull": [ "$likes", [] ] } },
+                { $size: { "$ifNull": [ "$dislikes", [] ] } }
+            ] }
         }
+    },
+    {
+        $sort: { "score":-1 }
+    }
     ]).toArray( (err, docs) => {
         if ( err ) {
             console.error(err);
