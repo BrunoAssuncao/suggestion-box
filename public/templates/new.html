@@ -1,1 +1,14 @@
-<h2>adding a new suggestion?! :D</h2>
+<h2>New Suggestion</h2>
+
+<div>
+    <form name="suggestionForm" ng-submit="suggestionForm.$valid && newCtrl.submitSuggestion()" novalidate>
+        <label for="title" class="sr-only">Title</label>
+        <input id="title" name="title" placeholder="Title" ng-model="newCtrl.suggestion.title" required>
+        <label for="body" class="sr-only">Description</label>
+        <textarea id="body" name="body" placeholder="Description" ng-model="newCtrl.suggestion.body" required></textarea>
+        <div class="row-fluid">
+            <input class="btn btn-primary span6" ng-class="{ disabled: !suggestionForm.$valid }" type="submit" value="Submit" />
+            <a class="btn span6" ng-href="#/">Cancel</a>
+        </div>
+    </form>
+</div>

@@ -25,7 +25,7 @@ router.post('/login', function(req, res) {
             res.redirect( req.session.destinationUrl || '/' );
         } else {
             req.session.username = undefined;
-            res.render('login', {title: 'Suggestion Box Login', title2: 'wrong login' });
+            res.render('login', {title: 'Suggestion Box', title2: 'Wrong login' });
         }
     });
 

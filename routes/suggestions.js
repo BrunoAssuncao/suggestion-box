@@ -12,9 +12,28 @@ function getCollection() {
 
 //GET ALL SUGGESTIONS
 router.get('/', (req, res) => {
-    mongo.findAll(collectionName, (docs) => {
-        docs.username = req.session.username;
-        res.json(docs);
+    getCollection().aggregate([
+        {
+            $project : {
+                title: "$title",
+                body: "$body",
+                creator: "$creator",
+                score: { $subtract: [
+                    { $size: { "$ifNull": [ "$likes", [] ] } },
+                    { $size: { "$ifNull": [ "$dislikes", [] ] } }
+                ] }
+            }
+        },
+        {
+            $sort: { "score":-1 }
+        }
+    ]).toArray( (err, docs) => {
+        if ( err ) {
+            console.error(err);
+            res.json(err);
+        } else {
+            res.json(docs);
+        }
     });
 });
 
@@ -22,16 +41,34 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     var id = mongo.getObjectID(req.params.id);
     getCollection().find({_id: id}).limit(1).next((err, doc) => {
-        doc.username = req.session.username;
-        res.json(doc);
+        if ( err ) {
+            console.error( err );
+        } else {
+            doc.username = req.session.username;
+            res.json(doc);
+        }
     });
 });
 
 //SUBMIT NEW SUGGESTION
 router.post('/', (req, res) => {
-    mongo.findAll('suggestions', (docs) => {
-        console.log(docs);
-        res.json(docs);
+    getCollection().insert({
+        creator: req.session.username,
+        title: req.body.title,
+        body: req.body.body,
+        likes: [], dislikes: []
+    }, (err, result) => {
+        if ( err ) {
+            console.error(err);
+            res.json(err);
+        } else {
+            if ( result && result.insertedCount === 1 ) {
+                res.status(200);
+                res.json( { id: result.insertedIds[0] } );
+            } else {
+                res.json(result);
+            }
+        }
     });
 });
 

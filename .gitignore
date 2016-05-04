@@ -4,3 +4,4 @@ node_modules/
 public/.sass-cache
 *.css
 config.js
+*.stackdump
