@@ -13,14 +13,20 @@
     <h1 class="text-center" ><%= title %></h1>
 </header>
 
-<form method="POST" action="/login" class="form-signin">
-    <h2 class="form-signin-heading"><%= title2 %></h2>
-    <label for="username" class="sr-only">Username</label>
-    <input id="username" name="username" placeholder="Username">
-    <label for="password" class="sr-only">Password</label>
-    <input id="password" name="password" type="password" placeholder="Password">
-    <button class="btn btn-lg btn-primary btn-block" type="Submit">log in</button>
-</form>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <form method="POST" action="/login" class="form-signin">
+                <h2 class="form-signin-heading"><%= title2 %></h2>
+                <label for="username" class="sr-only">Username</label>
+                <input id="username" name="username" placeholder="Username">
+                <label for="password" class="sr-only">Password</label>
+                <input id="password" name="password" type="password" placeholder="Password">
+                <button class="btn btn-lg btn-primary btn-block" type="Submit">log in</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 <footer>This is the footer</footer>
 
