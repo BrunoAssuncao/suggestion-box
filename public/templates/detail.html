@@ -5,16 +5,38 @@
 </div>
 <div class="list-group">
     <a class="list-group-item">
-        <h3 class="list-group-item-heading">{{suggestion.title}}</h3>
-        <p class="list-group-item-text">{{suggestion.body}}</p>
-        <p class="list-group-item-text"
-           ng-class="{negative:suggestion.score < 0, positive:suggestion.score > 0}">
-            <strong>Score: {{suggestion.score}}</strong>
-        </p>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-sm-1 voteSection">
+                    <form class="votingForm">
+                        </span>
+                        <label for="like">
+                            <input type="radio" ng-model="vote" value="like" ng-change="sendVote();" />
+                            <i class="fa fa fa-arrow-up vote" ng-model="vote" ng-class="{voted: vote == 'like' }" aria-hidden="true"> </i>
+                        </label>
+                        <span class="list-group-item-text votes"
+                            ng-class="{negative:suggestion.score < 0, positive:suggestion.score > 0}">
+                            <strong> {{score}}</strong>
+
+                        <label>
+                            <input type="radio" ng-model="vote"  value="dislike" ng-change="sendVote();"/>
+                            <i class="fa fa fa-arrow-down vote" ng-model="vote" ng-class="{voted: vote == 'dislike'}" aria-hidden="true" ></i>
+                        </label>
+                    </form>
+                </div>
+                <div class="col-xs-12 col-sm-11">
+                    <h3 class="list-group-item-heading">{{suggestion.title}}</h3>
+                    <p class="list-group-item-text">{{suggestion.body}}</p>
+                </div>
+            </div>
+        </div>
+
+    <!--
         <p class="list-group-item-text"><small>Likes: {{suggestion.likes.length}} | Dislikes: {{suggestion.dislikes.length}}</small></p>
         <p class="list-group-item-text" ng-show="unvoted()"><small>unvoted</small></p>
         <p class="list-group-item-text" ng-show="votedUp()"><small>voted up</small></p>
         <p class="list-group-item-text" ng-show="votedDown()"><small>voted down</small></p>
         <p class="list-group-item-text"><em>Suggested by {{suggestion.creator}}</em></p>
+    -->
     </a>
 </div>

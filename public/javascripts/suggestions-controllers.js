@@ -5,20 +5,43 @@ angular.module('suggestionbox')
 
         $scope.hasSuggestions = function() {
             return $scope.suggestions.length > 0;
-        }
+        };
     })
 
-    .controller('SuggestionDetailController', function($scope, $routeParams, $timeout, Suggestion) {
-        $scope.suggestion = Suggestion.get({id: $routeParams.id});
+    .controller('SuggestionDetailController', function($scope, $routeParams, $timeout, $http, Suggestion) {
+        var suggestion = Suggestion.get({id: $routeParams.id}, function() {
+            $scope.suggestion = suggestion;
+            $scope.username = suggestion.username;
+            $scope.score = getSuggestionScore(suggestion);
+            $scope.previousVote = suggestion.likes.includes( suggestion.username ) ? 'like' :
+                                    (suggestion.dislikes.includes( suggestion.username ) ? 'dislike' : null);
+            $scope.vote = $scope.previousVote;
+        });
 
-        $scope.votedUp = function() {
-            return $scope.suggestion.$resolved && $scope.suggestion.likes.includes( $scope.suggestion.username );
+        $scope.sendVote = function() {
+            var options = {
+                id: $scope.suggestion._id,
+                username: $scope.username,
+                vote: $scope.vote,
+                previousVote: $scope.previousVote
+            };
+
+            proccessVote(options);
         };
-        $scope.votedDown = function() {
-            return $scope.suggestion.$resolved && $scope.suggestion.dislikes.includes( $scope.suggestion.username );
-        };
-        $scope.unvoted = function() {
-            return $scope.suggestion.$resolved && !$scope.votedUp() && !$scope.votedDown();
+
+        function proccessVote(options) {
+            $http( {
+                method:'POST',
+                url: '/vote',
+                data: options
+            }).success(function(data){
+                $scope.suggestion = data[0];
+                $scope.score = getSuggestionScore($scope.suggestion);
+            });
+        }
+
+        function getSuggestionScore(suggestion) {
+            return suggestion.likes.length - suggestion.dislikes.length;
         }
     })
 

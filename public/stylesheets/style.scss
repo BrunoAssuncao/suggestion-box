@@ -50,6 +50,11 @@ body {
   }
 }
 
+.votingForm {
+    margin: 0;
+    min-width: 0;
+}
+
 a {
   color: #00B7FF;
 
@@ -57,10 +62,34 @@ a {
     &.positive { color: darkgreen; }
     &.negative { color: darkred; }
   }
+
+  .voteSection {
+      font-size: 18px;
+      text-align: center;
+
+      .votes {
+          margin: 3px;
+      }
+
+      .vote {
+          cursor: pointer;
+      }
+
+      .voted {
+          color: #ffa500;
+      }
+  }
 }
 
 @media (max-width: 720px ) {
     .btn {
         width: 100%;
+    }
+
+    .voteSection {
+        padding: 10px 0;
+        .votes {
+            margin: 10px;
+        }
     }
 }
