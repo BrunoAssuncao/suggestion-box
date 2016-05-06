@@ -18,18 +18,21 @@ angular.module('suggestionbox')
             $scope.vote = $scope.previousVote;
         });
 
-        $scope.sendVote = function() {
-            var options = {
-                id: $scope.suggestion._id,
-                username: $scope.username,
-                vote: $scope.vote,
-                previousVote: $scope.previousVote
-            };
+        $scope.proccessVote = function() {
+            console.log($scope.vote);
+            if($scope.vote !== $scope.previousVote) {
+                var options = {
+                    id: $scope.suggestion._id,
+                    username: $scope.username,
+                    vote: $scope.vote,
+                    previousVote: $scope.previousVote
+                };
 
-            proccessVote(options);
+                sendVote(options);
+            }
         };
 
-        function proccessVote(options) {
+        function sendVote(options) {
             $http( {
                 method:'POST',
                 url: '/vote',
@@ -37,6 +40,7 @@ angular.module('suggestionbox')
             }).success(function(data){
                 $scope.suggestion = data[0];
                 $scope.score = getSuggestionScore($scope.suggestion);
+                $scope.previousVote = $scope.vote;
             });
         }
 

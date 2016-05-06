@@ -12,6 +12,7 @@ router.post('/', function(req, res) {
     var options = req.body,
     id = mongo.getObjectID(options.id),
     like = options.vote === 'like',
+    //TODO:
     // toPush = like ? "likes" : "dislikes",  //This is commented out because when this logical was applied to check what array should be pushed,
                                               //mongo would create a new array called 'toPush' rather than updating thje like or dislike array.
     pushQuery = like ?  {"likes": options.username} : {"dislikes": options.username}, //This is not 'DRY' because of the reason described above.

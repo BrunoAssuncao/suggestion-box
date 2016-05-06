@@ -50,10 +50,6 @@ body {
   }
 }
 
-.votingForm {
-    margin: 0;
-    min-width: 0;
-}
 
 a {
   color: #00B7FF;
@@ -73,6 +69,7 @@ a {
 
       .vote {
           cursor: pointer;
+          display: block;
       }
 
       .voted {
@@ -90,6 +87,9 @@ a {
         padding: 10px 0;
         .votes {
             margin: 10px;
+        }
+        .vote {
+            display: inline-block;
         }
     }
 }

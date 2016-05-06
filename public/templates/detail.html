@@ -8,21 +8,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12 col-sm-1 voteSection">
-                    <form class="votingForm">
-                        </span>
-                        <label for="like">
-                            <input type="radio" ng-model="vote" value="like" ng-change="sendVote();" />
-                            <i class="fa fa fa-arrow-up vote" ng-model="vote" ng-class="{voted: vote == 'like' }" aria-hidden="true"> </i>
-                        </label>
-                        <span class="list-group-item-text votes"
-                            ng-class="{negative:suggestion.score < 0, positive:suggestion.score > 0}">
-                            <strong> {{score}}</strong>
-
-                        <label>
-                            <input type="radio" ng-model="vote"  value="dislike" ng-change="sendVote();"/>
-                            <i class="fa fa fa-arrow-down vote" ng-model="vote" ng-class="{voted: vote == 'dislike'}" aria-hidden="true" ></i>
-                        </label>
-                    </form>
+                    <i class="fa fa fa-arrow-up vote" ng-click="vote = 'like'; proccessVote();" ng-class="{voted: vote == 'like' }" aria-hidden="true"> </i>
+                    <span class="list-group-item-text votes"
+                        ng-class="{negative:suggestion.score < 0, positive:suggestion.score > 0}">
+                        <strong> {{score}}</strong>
+                    </span>
+                    <i class="fa fa fa-arrow-down vote" ng-model="vote" ng-click="vote = 'dislike'; proccessVote();" ng-class="{voted: vote == 'dislike'}" aria-hidden="true" ></i>
                 </div>
                 <div class="col-xs-12 col-sm-11">
                     <h3 class="list-group-item-heading">{{suggestion.title}}</h3>
