@@ -1,43 +1,74 @@
 @import "compass/css3";
-
-body {
-  padding: 50px 0;
+@import "config.scss";
+html, body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: $orange;
+  height: 100%;
 
-  header, footer {
-    text-align: center;
-  }
+  .mainContainer {
+      //padding: 50px 0;
+      background-color: #fff;
+      height: 100%;
+      padding-top: 50px;
+      padding-bottom: 50px;
 
-  a {
-    color: #00B7FF;
-  }
-
-  form {
-
-    max-width: 300px;
-    margin: 3em auto;
-
-    * {
-      width: 100%;
-    }
-
-    input {
-      padding: 10px;
-      border: 1px solid lightgray;
-
-      &#username {
-        border-radius: 0.5em 0.5em 0 0;
-        margin-top: 1em;
+      header, footer {
+          text-align: center;
       }
-      &#password {
-        border-radius: 0 0 0.5em 0.5em;
-        border-top: none;
+
+      a {
+          color: #00B7FF;
       }
-    }
 
-    button {
-      margin-top: 1em;
-    }
+      .logo {
+          margin-bottom: 15px;
+      }
+
+      form {
+
+          max-width: 300px;
+          margin: 3em auto;
+
+          * {
+              width: 100%;
+          }
+
+          input {
+              padding: 10px;
+              border: 1px solid lightgray;
+              margin-top: 1em;
+
+            //   &#username {
+            //       border-radius: 0.5em 0.5em 0 0;
+            //       margin-top: 1em;
+            //   }
+            //   &#password {
+            //       border-radius: 0 0 0.5em 0.5em;
+            //       border-top: none;
+            //   }
+              &:focus {
+                  border: 1px solid $orange;
+                  outline: none;
+                  -webkit-transition: border $standardDuration; /* Safari */
+                  transition:border $standardDuration;
+              }
+            //   &#password:focus {
+            //       border-top: 1px solid $orange;
+            //   }
+          }
+
+          button {
+              margin-top: 1em;
+              background-color: $orange;
+              border-color: $orange;
+              -webkit-transition: background-color $standardDuration, color $standardDuration; /* Safari */
+              transition: background-color $standardDuration, color $standardDuration;
+              &:hover {
+                  background-color: #fff;
+                  color: $orange;
+                  border-color: $orange;
+              }
+          }
+      }
   }
-
 }
