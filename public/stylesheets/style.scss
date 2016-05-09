@@ -1,90 +1,160 @@
 @import "compass/css3";
+@import "config.scss";
+
+html, body {
+    height: 100%;
+    padding: 0;
+}
 
 body {
-  padding: 50px 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: $orange;
 
-  header, footer {
-    text-align: center;
-  }
+  .mainContainer {
+      background-color: #fff;
+      min-height: 100%;
 
-  .actions {
-    text-align: right;
-  }
+      header, footer {
+          padding-top: 25px;
+          padding-bottom: 15px;
+          text-align: center;
+      }
 
-  .btn {
-      margin: 15px 0;
-  }
+      .wrap {
+          min-height: 100%;
+          margin-bottom: -46px;
 
-  .createdBy {
-      margin-bottom: 15px;
-  }
+          &:after {
+              content: "";
+              display: block;
+              height: 46px;
+          }
+      }
+      .actions {
+          text-align: right;
+      }
 
-  form {
-    min-width: 300px;
-    //max-width: 80%;
-    margin: 3em auto;
+      .btn {
+          margin: 15px 0;
+      }
 
-    * {
-      width: 100%;
-    }
 
-    .ng-invalid.ng-dirty {
-      border-color: #FA787E;
-    }
+      form {
+          min-width: 300px;
+          margin: 3em auto;
 
-    input {
-      padding: 10px;
-      border: 1px solid lightgray;
-      border-radius: 0.5em 0.5em 0 0;
-      margin-top: 1em;
-    }
+          * {
+              width: 100%;
+          }
 
-    textarea {
-      padding: 10px;
-      min-height: 8em;
-      border: 1px solid lightgray;
-      border-radius: 0 0 0.5em 0.5em;
-      border-top: none;
-    }
+          .ng-invalid.ng-dirty {
+              border-color: #FA787E;
+          }
 
-    [type=submit] {
-      margin-top: 1em;
-    }
+          input {
+              padding: 10px;
+              border: 1px solid lightgray;
+              //border-radius: 0.5em 0.5em 0 0;
+              margin: 1em 0;
+
+             &:focus {
+                 outline: 0;
+                 border: 1px solid $orange;
+                 outline: none;
+                 -webkit-transition: border $standardDuration; /* Safari */
+                 transition:border $standardDuration;
+             }
+          }
+
+          textarea {
+              padding: 10px;
+              min-height: 8em;
+              border: 1px solid lightgray;
+              //border-radius: 0 0 0.5em 0.5em;
+              //border-top: none;
+
+              &:focus {
+                  border: 1px solid $orange;
+                  outline: none;
+                  -webkit-transition: border $standardDuration; /* Safari */
+                  transition:border $standardDuration;
+              }
+          }
+
+          [type=submit] {
+              margin-top: 1em;
+          }
+      }
+
+      .suggestionsList {
+          float: left;
+          .suggestion {
+                float: left;
+                width: 100%;
+
+                  .createdBy {
+                      display: inline-block;
+                      float: right;
+                  }
+
+                  h3 {
+                      display: inline-block;
+                  }
+
+                  p {
+                      &.positive { color: darkgreen; }
+                      &.negative { color: darkred; }
+                  }
+          }
+      }
+
+      .button {
+          margin-top: 1em;
+          color: #fff;
+          background-color: $orange;
+          border-color: $orange;
+          -webkit-transition: background-color $standardDuration, color $standardDuration; /* Safari */
+          transition: background-color $standardDuration, color $standardDuration;
+          &:hover {
+              background-color: #fff;
+              color: $orange;
+              border-color: $orange;
+          }
+      }
+
+      .voteSection {
+          font-size: 18px;
+          text-align: center;
+
+          .votes {
+              margin: 3px;
+          }
+
+          .vote {
+              cursor: pointer;
+              display: block;
+          }
+
+          .voted {
+              color: #ffa500;
+          }
+      }
+
+
   }
 }
 
 
-a {
-  color: #00B7FF;
 
-  p {
-    &.positive { color: darkgreen; }
-    &.negative { color: darkred; }
-  }
-
-  .voteSection {
-      font-size: 18px;
-      text-align: center;
-
-      .votes {
-          margin: 3px;
-      }
-
-      .vote {
-          cursor: pointer;
-          display: block;
-      }
-
-      .voted {
-          color: #ffa500;
-      }
-  }
-}
 
 @media (max-width: 720px ) {
     .btn {
         width: 100%;
+    }
+
+    .createdBy {
+        display: block;
+        float: left;
     }
 
     .voteSection {

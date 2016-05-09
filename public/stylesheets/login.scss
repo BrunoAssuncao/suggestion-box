@@ -57,8 +57,9 @@ html, body {
             //   }
           }
 
-          button {
+          .button {
               margin-top: 1em;
+              color: #fff;
               background-color: $orange;
               border-color: $orange;
               -webkit-transition: background-color $standardDuration, color $standardDuration; /* Safari */

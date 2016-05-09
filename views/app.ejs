@@ -2,21 +2,29 @@
 <html ng-app="suggestionbox">
 <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           crossorigin="anonymous" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" />
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
 </head>
 <body>
-<header>
-    <h1 class="text-center" ><%= title %></h1>
-</header>
-<div class="container">
-    <div ng-view></div>
+<div class="container mainContainer">
+    <div class="wrap">
+        <header class="row">
+            <div class="col-xs-12">
+                <a href="/#/"><img src="/assets/enear-logo1.png" alt="Home" title="Home" /> </a>
+                <h1 class="text-center" ><%= title %></h1>
+            </div>
+        </header>
+        <div ng-view></div>
+    </div>
+    <footer class="row">
+        <div class="col-xs-12">
+            Open Source - code: <a href="//github.com/BrunoAssuncao/suggestion-box">suggestion-box</a>
+        </div>
+    </footer>
 </div>
-
-<footer>Open Source - code: <a href="//github.com/BrunoAssuncao/suggestion-box">suggestion-box</a></footer>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"
         crossorigin="anonymous"></script>
