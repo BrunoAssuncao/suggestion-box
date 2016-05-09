@@ -13,23 +13,19 @@ body {
   .mainContainer {
       background-color: #fff;
       min-height: 100%;
+      margin-bottom: -56px;
 
+      &::after {
+          content: "";
+          display: block;
+          height: 46px;
+      }
       header, footer {
           padding-top: 25px;
           padding-bottom: 15px;
           text-align: center;
       }
 
-      .wrap {
-          min-height: 100%;
-          margin-bottom: -46px;
-
-          &:after {
-              content: "";
-              display: block;
-              height: 46px;
-          }
-      }
       .actions {
           text-align: right;
       }
@@ -140,6 +136,13 @@ body {
           }
       }
 
+  }
+
+ footer {
+      padding-top: 25px;
+      padding-bottom: 15px;
+      text-align: center;
+      background-color: #fff;
 
   }
 }
