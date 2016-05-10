@@ -23,11 +23,6 @@ body {
       header, footer {
           padding-top: 25px;
           padding-bottom: 15px;
-
-          .logo {
-              text-align: center;
-              display: block;
-          }
       }
 
       .actions {
@@ -86,16 +81,15 @@ body {
           }
       }
 
+      .createdBy {
+          text-align: right;
+      }
       .suggestionsList {
           float: left;
           .suggestion {
                 float: left;
                 width: 100%;
 
-                  .createdBy {
-                      display: inline-block;
-                      float: right;
-                  }
 
                   h3 {
                       display: inline-block;
@@ -154,13 +148,8 @@ body {
 @media (max-width: 720px ) {
     body {
         .mainContainer {
-            .suggestionsList {
-                .suggestion {
-                    .createdBy {
-                        display: block;
-                        float: none;
-                    }
-                }
+            .createdBy {
+                text-align: left;
             }
 
             .voteSection {

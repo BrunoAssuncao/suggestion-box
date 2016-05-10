@@ -17,9 +17,15 @@
                     <i class="fa fa fa-arrow-down vote" ng-model="vote" ng-click="vote = 'dislike'; proccessVote();" ng-class="{voted: vote == 'dislike'}" aria-hidden="true" ></i>
                 </div>
                 <div class="col-xs-12 col-sm-11">
-                    <h3 class="list-group-item-heading">{{suggestion.title}}</h3>
-                    <p class="createdBy">created by: {{suggestion.creator}}</p>
-                    <p class="list-group-item-text">{{suggestion.body}}</p>
+                    <div class="row">
+                        <h3 class="col-xs-12 col-sm-7 list-group-item-heading">{{suggestion.title}}</h3>
+                        <p class="col-xs-12 col-sm-5 createdBy">created by: {{suggestion.creator}} | {{suggestion.createdAt | date:"MM/dd/yyyy @ h:mma"}}</p>
+
+                    </div>
+                    <div class="row">
+                        <p class=" col-xs-12 list-group-item-text">{{suggestion.body}}</p>
+
+                    </div>
                 </div>
             </div>
         </div>

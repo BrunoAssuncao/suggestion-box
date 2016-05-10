@@ -16,6 +16,7 @@ router.get('/', (req, res) => {
             title: "$title",
             body: "$body",
             creator: "$creator",
+            createdAt:  "$createdAt",
             score: { $subtract: [
                 { $size: { "$ifNull": [ "$likes", [] ] } },
                 { $size: { "$ifNull": [ "$dislikes", [] ] } }
@@ -54,7 +55,8 @@ router.post('/', (req, res) => {
         creator: req.session.username,
         title: req.body.title,
         body: req.body.body,
-        likes: [], dislikes: []
+        likes: [], dislikes: [],
+        createdAt: new Date()
     }, (err, result) => {
         if ( err ) {
             console.error(err);
@@ -69,7 +71,5 @@ router.post('/', (req, res) => {
         }
     });
 });
-
-
 
 module.exports = router;
