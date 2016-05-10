@@ -13,8 +13,11 @@
     <div class="wrap">
         <header class="row">
             <div class="col-xs-12">
-                <a href="/#/"><img src="/assets/enear-logo1.png" alt="Home" title="Home" /> </a>
-                <h1 class="text-center" ><%= title %></h1>
+                <a class="logo" href="/#/"><img src="/assets/enear-logo1.png" alt="Home" title="Home" /> </a>
+                <h1 class="text-center"><%= title %></h1>
+            </div>
+            <div class="col-xs-12">
+                You are logged as: <%= username %>. <a href="/logout">Logout</a>
             </div>
         </header>
         <div ng-view></div>

@@ -4,18 +4,20 @@
     <title><%= title %></title>
     <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css"
           crossorigin="anonymous">
-    <link rel="icon" type="image/png" href="/assets/favicon.png">
     <link rel='stylesheet' href='/stylesheets/login.css'/>
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+
 </head>
 <body>
 <div class="container mainContainer" >
     <header class="row">
-        <a><img class="logo" src="/assets/enear-logo1.png" title="enear" alt="enear"/></a>
+        <img class="logo" src="/assets/enear-logo1.png" title="enear" alt="enear"/>
         <h1 class="text-center col-xs-12" ><%= title %></h1>
     </header>
     <div class="row">
         <div class="col-xs-12">
             <form method="POST" action="/login" class="form-signin">
+                <input type="hidden" name="redirectTo" value="/#<%= redirectTo %>" />
                 <h2 class="form-signin-heading"><%= title2 %></h2>
                 <label for="username" class="sr-only">Username</label>
                 <input id="username" name="username" placeholder="Username">

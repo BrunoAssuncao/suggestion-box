@@ -23,7 +23,11 @@ body {
       header, footer {
           padding-top: 25px;
           padding-bottom: 15px;
-          text-align: center;
+
+          .logo {
+              text-align: center;
+              display: block;
+          }
       }
 
       .actions {

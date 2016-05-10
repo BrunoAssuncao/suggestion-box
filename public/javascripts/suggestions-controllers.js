@@ -2,6 +2,7 @@ angular.module('suggestionbox')
 
     .controller('SuggestionsListController', function($scope, Suggestion) {
         $scope.suggestions = Suggestion.query();
+        console.log($scope);
 
         $scope.hasSuggestions = function() {
             return $scope.suggestions.length > 0;
