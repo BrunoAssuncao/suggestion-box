@@ -17,17 +17,25 @@ router.post('/login', function(req, res) {
         https: true
     };
 
+    console.log(req.session);
+
     loginOnExchange( loginData, function( error, success ) {
         if ( success ) {
             console.log('Login OK');
             req.session.username = req.body.username;
-            res.redirect( req.session.destinationUrl || '/' );
+            res.redirect( '/' );
         } else {
             req.session.username = undefined;
             res.render('login', {title: 'Suggestion Box', title2: 'Wrong login' });
         }
     });
 
+});
+
+router.get ('/logout', function(req, res) {
+    req.session.destroy();
+
+    res.json("Logged Out!");
 });
 
 /* GET home/app page. */

@@ -6,13 +6,19 @@ html, body {
   height: 100%;
 
   .mainContainer {
-      //padding: 50px 0;
       background-color: #fff;
       height: 100%;
       padding-top: 50px;
       padding-bottom: 50px;
+      margin-bottom: -56px;
 
-      header, footer {
+      &::after {
+          content: "";
+          display: block;
+          height: 46px;
+      }
+
+      header {
           text-align: center;
       }
 
@@ -38,23 +44,12 @@ html, body {
               border: 1px solid lightgray;
               margin-top: 1em;
 
-            //   &#username {
-            //       border-radius: 0.5em 0.5em 0 0;
-            //       margin-top: 1em;
-            //   }
-            //   &#password {
-            //       border-radius: 0 0 0.5em 0.5em;
-            //       border-top: none;
-            //   }
               &:focus {
                   border: 1px solid $orange;
                   outline: none;
                   -webkit-transition: border $standardDuration; /* Safari */
                   transition:border $standardDuration;
               }
-            //   &#password:focus {
-            //       border-top: 1px solid $orange;
-            //   }
           }
 
           .button {
@@ -71,5 +66,12 @@ html, body {
               }
           }
       }
+  }
+
+   footer {
+       padding-top: 25px;
+       padding-bottom: 15px;
+       text-align: center;
+       background-color: #fff;
   }
 }
