@@ -1,13 +1,11 @@
-<div class="row" ng-show="hasSuggestions()">
-    <h2 class="col-xs-12">Open Suggestions</h2>
-</div>
 <div class="row">
-    <div class="actions col-xs-12">
+    <h2 class="col-xs-12 col-sm-6 listTitle">Open Suggestions</h2>
+    <div class="actions col-xs-12 col-sm-6">
         <a class="btn button" ng-href="#/new">New suggestion</a>
     </div>
 </div>
 
-<div class="row">
+<div class="row"  ng-show="hasSuggestions()">
     <div class="col-xs-12">
         <div class="list-group suggestionsList" ng-show="hasSuggestions()">
             <a class="list-group-item suggestion" ng-href="#/suggestion/{{suggestion._id}}"
