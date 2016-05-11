@@ -18,12 +18,12 @@
                 </div>
                 <div class="col-xs-12 col-sm-11">
                     <div class="row">
-                        <h3 class="col-xs-12 col-sm-7 list-group-item-heading">{{suggestion.title}} <span class="small" ng-show="!isAdmin">({{suggestion.state}})</span></h3>
+                        <h3 class="col-xs-12 col-sm-7 list-group-item-heading">{{suggestion.title}} <span class="small" ng-show="!isAdmin && suggestion.state">({{suggestion.state}})</span></h3>
                         <p class="col-xs-12 col-sm-5 createdBy">created by: {{suggestion.creator}} | {{suggestion.createdAt | date:"MM/dd/yyyy @ h:mma"}}</p>
                     </div>
                     <div class="row">
                         <p class=" col-xs-12 list-group-item-text">{{suggestion.body}}</p>
-                        <form id="stateForm" class="col-xs-12 col-sm-2">
+                        <form id="stateForm" class="col-xs-12 col-sm-2" ng-show="isAdmin">
                             <input  type="hidden" name="id" ng-model="data._id" value="{{suggestion._id}}"/>
                             <select ng-model="suggestion.state" ng-change="changeState()">
                                 <option ng-repeat="state in states" value="{{state.state}}" ng-selected="suggestion.state === state.state">
