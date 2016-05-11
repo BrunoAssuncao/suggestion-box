@@ -1,16 +1,12 @@
 var router = require('express').Router();
 var mongo = require('../utils/mongoUtils');
-var collectionName = 'suggestions';
 var request = require('request');
 var collection = undefined;
 
-function getCollection() {
-    return collection || (collection = mongo.getDb().collection(collectionName));
-}
 
 //GET ALL SUGGESTIONS
 router.get('/', (req, res) => {
-    getCollection().aggregate([
+    mongo.getDb().collection('suggestions').aggregate([
     {
         $project : {
             title: "$title",
@@ -20,11 +16,9 @@ router.get('/', (req, res) => {
             score: { $subtract: [
                 { $size: { "$ifNull": [ "$likes", [] ] } },
                 { $size: { "$ifNull": [ "$dislikes", [] ] } }
-            ] }
+            ] },
+            state: "$state"
         }
-    },
-    {
-        $sort: { "score":-1 }
     }
     ]).toArray( (err, docs) => {
         if ( err ) {
@@ -36,10 +30,29 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/states', (req, res) => {
+    //Couldn't use the 'getCollection' function, even changing the collectionName to 'suggestionStates'
+    //It would query the 'suggestions' collection. Changed the getCollection method to accept collectionName as an argument
+    // and still didn't worked
+    mongo.getDb().collection('suggestionStates').find({}).toArray( (err, docs) => {
+        if( err) {
+            console.log( err );
+        }
+        else {
+            var states = [];
+            //TODO: How to achieve this in MongoDB Query
+            for( var i = 0; i < docs.length; i+=1) {
+                states.push(docs[i].state);
+            }
+            res.json(states);
+        }
+    });
+});
+
 //GET SPECIFIC SUGGESTION
 router.get('/:id', (req, res) => {
     var id = mongo.getObjectID(req.params.id);
-    getCollection().find({_id: id}).limit(1).next((err, doc) => {
+    mongo.getDb().collection('suggestions').find({_id: id}).limit(1).next((err, doc) => {
         if ( err ) {
             console.error( err );
         } else {
@@ -51,7 +64,7 @@ router.get('/:id', (req, res) => {
 
 //SUBMIT NEW SUGGESTION
 router.post('/', (req, res) => {
-    getCollection().insert({
+    mongo.getDb().collection('suggestions').insert({
         creator: req.session.username,
         title: req.body.title,
         body: req.body.body,
@@ -71,5 +84,6 @@ router.post('/', (req, res) => {
         }
     });
 });
+
 
 module.exports = router;

@@ -1,7 +1,13 @@
 angular.module('suggestionbox')
 
     .controller('SuggestionsListController', function($scope, Suggestion) {
-        $scope.suggestions = Suggestion.query();
+        $scope.suggestions = Suggestion.suggestions.query();
+        $scope.states = [];
+
+        Suggestion.states().success( function(data) {
+            $scope.states = data;
+        });
+
         console.log($scope);
 
         $scope.hasSuggestions = function() {
@@ -10,7 +16,7 @@ angular.module('suggestionbox')
     })
 
     .controller('SuggestionDetailController', function($scope, $routeParams, $timeout, $http, Suggestion) {
-        var suggestion = Suggestion.get({id: $routeParams.id}, function() {
+        var suggestion = Suggestion.suggestions.get({id: $routeParams.id}, function() {
             $scope.suggestion = suggestion;
             $scope.username = suggestion.username;
             $scope.score = getSuggestionScore(suggestion);
@@ -51,7 +57,7 @@ angular.module('suggestionbox')
     })
 
     .controller('NewSuggestionController', function(Suggestion) {
-        this.suggestion = new Suggestion();
+        this.suggestion = new Suggestion.suggestions();
         this.submitSuggestion = function() {
             this.suggestion.$save().then(function( suggestion ) {
                 window.location = '#/suggestion/' + suggestion.id;

@@ -89,15 +89,9 @@ body {
           .suggestion {
                 float: left;
                 width: 100%;
-
-
-                  h3 {
-                      display: inline-block;
-                  }
-
-                  p {
-                      &.positive { color: darkgreen; }
-                      &.negative { color: darkred; }
+                p {
+                    &.positive { color: darkgreen; }
+                    &.negative { color: darkred; }
                   }
           }
       }
@@ -114,6 +108,10 @@ body {
               color: $orange;
               border-color: $orange;
           }
+      }
+
+      .small {
+          font-size: 12px;
       }
 
       .voteSection {
