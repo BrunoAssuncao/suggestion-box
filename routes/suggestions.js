@@ -39,15 +39,22 @@ router.get('/states', (req, res) => {
             console.log( err );
         }
         else {
-            var states = [];
-
-            //TODO: How to achieve this in MongoDB Query
-            for( var i = 0; i < docs.length; i+=1) {
-                states.push(docs[i].state);
-            }
-            res.json(states);
+            res.json(docs);
         }
     });
+});
+
+router.post('/states', (req, res) => {
+    var suggestion = req.body;
+
+    mongo.getDb().collection('suggestions').update(
+        {_id: mongo.getObjectID(suggestion._id)},
+        {
+            $set: {
+                state: suggestion.state
+            }
+        }
+    );
 });
 
 //GET SPECIFIC SUGGESTION

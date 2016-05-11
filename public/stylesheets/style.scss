@@ -84,6 +84,15 @@ body {
       .createdBy {
           text-align: right;
       }
+
+      #stateForm {
+        margin:15px 0;
+
+        select {
+            outline-color: $orange;
+        }
+      }
+
       .suggestionsList {
           float: left;
           .suggestion {

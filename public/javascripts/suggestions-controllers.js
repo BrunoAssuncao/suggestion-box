@@ -25,11 +25,21 @@ angular.module('suggestionbox')
     .controller('SuggestionDetailController', function($scope, $routeParams, $timeout, $http, Suggestion) {
         var suggestion = Suggestion.suggestions.get({id: $routeParams.id}, function() {
             $scope.suggestion = suggestion;
+            $scope.data = {};
             $scope.username = suggestion.username;
             $scope.score = getSuggestionScore(suggestion);
             $scope.previousVote = suggestion.likes.includes( suggestion.username ) ? 'like' :
                                     (suggestion.dislikes.includes( suggestion.username ) ? 'dislike' : null);
             $scope.vote = $scope.previousVote;
+
+            Suggestion.states().success( function(data) {
+                $scope.states = data;
+            })
+            .then(Suggestion.getAdmins().success( function(data) {
+                $scope.isAdmin = data.indexOf($scope.username) > -1;
+            }));
+
+        console.log($scope);
         });
 
         $scope.proccessVote = function() {
@@ -44,6 +54,16 @@ angular.module('suggestionbox')
 
                 sendVote(options);
             }
+        };
+
+        $scope.changeState = function(){
+            $http({
+                method: 'POST',
+                url:'/suggestions/states',
+                data: $scope.suggestion
+            }).success(function(data) {
+                console.log("changed!");
+            });
         };
 
         function sendVote(options) {
