@@ -40,6 +40,7 @@ router.get('/states', (req, res) => {
         }
         else {
             var states = [];
+
             //TODO: How to achieve this in MongoDB Query
             for( var i = 0; i < docs.length; i+=1) {
                 states.push(docs[i].state);

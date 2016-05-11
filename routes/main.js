@@ -1,4 +1,5 @@
 var router = require('express').Router();
+var mongo = require('../utils/mongoUtils');
 
 var loginOnExchange = require('../utils/loginOnExchange');
 
@@ -30,9 +31,32 @@ router.post('/login', function(req, res) {
 
 });
 
+router.get('/user', function( req, res ) {
+    if(req.session.username !== null )
+
+    res.json(req.session.username || "please login first");
+});
+
 router.get ('/logout', function(req, res) {
     req.session.destroy();
     res.redirect( '/' );
+});
+
+router.get('/admins', function(req, res) {
+    mongo.getDb().collection('admins').find({}).toArray( (err, docs) => {
+        if( err) {
+            console.log( err );
+        }
+        else {
+            var admins = [];
+
+            //TODO: How to achieve this in MongoDB Query
+            for( var i = 0; i < docs.length; i+=1) {
+                admins.push(docs[i].username);
+            }
+            res.json(admins);
+        }
+    });
 });
 
 /* GET home/app page. */
