@@ -16,21 +16,19 @@ angular.module('suggestionbox')
             $scope.isAdmin = data.indexOf($scope.username) > -1;
         }));
 
-        console.log($scope);
         $scope.hasSuggestions = function() {
             return $scope.suggestions.length > 0;
         };
     })
 
-    .controller('SuggestionDetailController', function($scope, $routeParams, $timeout, $http, Suggestion) {
-        var suggestion = Suggestion.suggestions.get({id: $routeParams.id}, function() {
+    .controller('SuggestionDetailController', function($scope, $routeParams, $location, $timeout, $http, Suggestion) {
+        var suggestion = new Suggestion.suggestions.get({id: $routeParams.id}, function() {
             $scope.suggestion = suggestion;
             $scope.data = {};
             $scope.username = suggestion.username;
-            $scope.score = getSuggestionScore(suggestion);
-            $scope.previousVote = suggestion.likes.includes( suggestion.username ) ? 'like' :
-                                    (suggestion.dislikes.includes( suggestion.username ) ? 'dislike' : null);
-            $scope.vote = $scope.previousVote;
+            $scope.getVote($scope.suggestion);
+            $scope.deleteWarning = false;
+
 
             Suggestion.states().success( function(data) {
                 $scope.states = data;
@@ -39,44 +37,40 @@ angular.module('suggestionbox')
                 $scope.isAdmin = data.indexOf($scope.username) > -1;
             }));
 
-        console.log($scope);
         });
 
         $scope.proccessVote = function() {
-            console.log($scope.vote);
-            if($scope.vote !== $scope.previousVote) {
-                var options = {
-                    id: $scope.suggestion._id,
-                    username: $scope.username,
-                    vote: $scope.vote,
-                    previousVote: $scope.previousVote
-                };
-
-                sendVote(options);
+            if($scope.suggestion.vote !== $scope.suggestion.previousVote) {
+                $scope.saveSuggestion("vote");
             }
         };
 
-        $scope.changeState = function(){
-            $http({
-                method: 'POST',
-                url:'/suggestions/states',
-                data: $scope.suggestion
-            }).success(function(data) {
-                console.log("changed!");
+        $scope.changeState = function() {
+            $scope.saveSuggestion("state");
+        };
+
+        $scope.saveSuggestion = function(action){
+            $scope.suggestion.action = action;
+            $scope.suggestion.$save({}, function(data, headers) {
+                $scope.suggestion = data;
+                $scope.getVote($scope.suggestion);
+            }, function(data, headers) {
+                console.log(data);
             });
         };
 
-        function sendVote(options) {
-            $http( {
-                method:'POST',
-                url: '/vote',
-                data: options
-            }).success(function(data){
-                $scope.suggestion = data[0];
-                $scope.score = getSuggestionScore($scope.suggestion);
-                $scope.previousVote = $scope.vote;
-            });
-        }
+        $scope.deleteSuggestion = function() {
+            $scope.suggestion.$delete();
+            $scope.deleteWarning = false;
+            $location.path('/');
+        };
+
+        $scope.getVote = function(suggestion) {
+            $scope.score = getSuggestionScore(suggestion);
+            $scope.suggestion.previousVote = suggestion.likes.includes( suggestion.username ) ? 'like' :
+                                    (suggestion.dislikes.includes( suggestion.username ) ? 'dislike' : null);
+            $scope.suggestion.vote = $scope.suggestion.previousVote;
+        };
 
         function getSuggestionScore(suggestion) {
             return suggestion.likes.length - suggestion.dislikes.length;

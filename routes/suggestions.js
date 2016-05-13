@@ -1,33 +1,45 @@
 var router = require('express').Router();
 var mongo = require('../utils/mongoUtils');
+var suggestionHandler = require('../utils/suggestionHandler');
 var request = require('request');
 var collection = undefined;
 
 
 //GET ALL SUGGESTIONS
-router.get('/', (req, res) => {
-    mongo.getDb().collection('suggestions').aggregate([
-    {
-        $project : {
-            title: "$title",
-            body: "$body",
-            creator: "$creator",
-            createdAt:  "$createdAt",
-            score: { $subtract: [
-                { $size: { "$ifNull": [ "$likes", [] ] } },
-                { $size: { "$ifNull": [ "$dislikes", [] ] } }
-            ] },
-            state: "$state"
-        }
-    }
-    ]).toArray( (err, docs) => {
-        if ( err ) {
-            console.error(err);
+router.get('/', function(req, res) {
+    suggestionHandler.getSuggestions(function(err, docs) {
+        if(err){
+            console.log(err);
             res.json(err);
-        } else {
+        }
+        else {
             res.json(docs);
         }
-    });
+    })
+});
+
+//SUBMIT NEW SUGGESTION
+router.post('/', function (req, res) {
+
+    suggestionHandler.createNew({
+        creator: req.session.username,
+        title: req.body.title,
+        body: req.body.body,
+    }, function(err, result){
+        if ( err ) {
+               console.error(err);
+               res.json(err);
+       }
+       else {
+           if ( result && result.insertedCount === 1 ) {
+               res.status(200);
+               res.json( { id: result.insertedIds[0] } );
+           }
+           else {
+               res.json(result);
+           }
+       }
+    })
 });
 
 router.get('/states', (req, res) => {
@@ -59,8 +71,7 @@ router.post('/states', (req, res) => {
 
 //GET SPECIFIC SUGGESTION
 router.get('/:id', (req, res) => {
-    var id = mongo.getObjectID(req.params.id);
-    mongo.getDb().collection('suggestions').find({_id: id}).limit(1).next((err, doc) => {
+    suggestionHandler.getSuggestion(req.params.id, function(err, doc) {
         if ( err ) {
             console.error( err );
         } else {
@@ -70,28 +81,28 @@ router.get('/:id', (req, res) => {
     });
 });
 
-//SUBMIT NEW SUGGESTION
-router.post('/', (req, res) => {
-    mongo.getDb().collection('suggestions').insert({
-        creator: req.session.username,
-        title: req.body.title,
-        body: req.body.body,
-        likes: [], dislikes: [],
-        createdAt: new Date()
-    }, (err, result) => {
-        if ( err ) {
-            console.error(err);
+router.post('/:id', (req, res) => {
+    console.log(req.body);
+
+    var suggestion = req.body;
+    suggestionHandler[suggestion.action](suggestion, function(err, docs){
+        if(err) {
+            console.log("error: " + err);
             res.json(err);
-        } else {
-            if ( result && result.insertedCount === 1 ) {
-                res.status(200);
-                res.json( { id: result.insertedIds[0] } );
-            } else {
-                res.json(result);
-            }
+        }
+        else {
+            console.log(docs);
+            docs.username = req.session.username;
+            res.json(docs);
         }
     });
 });
 
+router.delete('/:id', (req, res) => {
+    suggestionHandler.delete(req.params.id, function(err, docs) {
+        console.log("Suggestion " + req.params.id + " deleted!" );
+        res.json("deleted");
+    });
+});
 
 module.exports = router;

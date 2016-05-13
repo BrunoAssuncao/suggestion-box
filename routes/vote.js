@@ -19,7 +19,7 @@ router.post('/', function(req, res) {
     pullQuery = like ? {"dislikes": options.username} : {"likes": options.username};
 
     getCollection().update(
-        {_id: id},
+        {_id: id },
         {
             $addToSet: pushQuery,
             $pull: pullQuery

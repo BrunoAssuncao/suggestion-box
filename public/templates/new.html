@@ -5,12 +5,12 @@
 <div class="row">
     <form class="col-xs-12" name="suggestionForm" ng-submit="suggestionForm.$valid && newCtrl.submitSuggestion()" novalidate>
         <label for="title" class="sr-only">Title</label>
-        <input id="title" name="title" placeholder="Title" ng-model="newCtrl.suggestion.title" required>
+        <input id="title" class="col-xs-12" name="title" placeholder="Title" ng-model="newCtrl.suggestion.title" required>
         <label for="body" class="sr-only">Description</label>
-        <textarea id="body" name="body" placeholder="Description" ng-model="newCtrl.suggestion.body" required></textarea>
+        <textarea id="body" class="col-xs-12" name="body" placeholder="Description" ng-model="newCtrl.suggestion.body" required></textarea>
         <div class="row-fluid">
-            <input class="btn button" ng-class="{ disabled: !suggestionForm.$valid }" type="submit" value="Submit" />
             <a class="btn" ng-href="#/">Cancel</a>
+            <input class="btn button" ng-class="{ disabled: !suggestionForm.$valid }" type="submit" value="Submit" />
         </div>
     </form>
 </div>

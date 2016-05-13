@@ -6,27 +6,25 @@
 </div>
 
 <div class="row"  ng-show="hasSuggestions()">
-    <div class="col-xs-12">
-        <div class="list-group suggestionsList" ng-show="hasSuggestions()">
-            <a class="list-group-item suggestion" ng-href="#/suggestion/{{suggestion._id}}"
-                ng-repeat="suggestion in suggestions | orderBy:'[ -score, -createdAt]'">
-                <div class="col-xs-12 col-sm-1">
-                    <p class="list-group-item-text"
-                    ng-class="{negative:suggestion.score < 0, positive:suggestion.score > 0}">
-                    Score: {{suggestion.score}}
-                    </p>
+    <div class="col-xs-12 suggestionsList" ng-show="hasSuggestions()">
+        <a class="list-group-item suggestion" ng-href="#/suggestion/{{suggestion._id}}"
+            ng-repeat="suggestion in suggestions | orderBy:'[ -score, -createdAt]'">
+            <div class="col-xs-12 col-sm-1">
+                <p class="list-group-item-text"
+                ng-class="{negative:suggestion.score < 0, positive:suggestion.score > 0}">
+                Score: {{suggestion.score}}
+                </p>
+            </div>
+            <div class="col-xs-12 col-sm-11">
+                <div class="row">
+                    <h4 class="list-group-item-heading col-xs-12 col-sm-7">{{suggestion.title}} <span class="small">({{suggestion.state}})</span></h4>
+                    <p class="createdBy col-xs-12 col-sm-5">created by: {{suggestion.creator}} | {{suggestion.createdAt | date:"MM/dd/yyyy @ h:mma"}}</p>
                 </div>
-                <div class="col-xs-12 col-sm-11">
-                    <div class="row">
-                        <h4 class="list-group-item-heading col-xs-12 col-sm-7">{{suggestion.title}} <span class="small">({{suggestion.state}})</span></h4>
-                        <p class="createdBy col-xs-12 col-sm-5">created by: {{suggestion.creator}} | {{suggestion.createdAt | date:"MM/dd/yyyy @ h:mma"}}</p>
-                    </div>
-                    <div class="row">
-                        <p class="list-group-item-text col-xs-12">{{suggestion.body}}</p>
-                    </div>
+                <div class="row">
+                    <p class="list-group-item-text col-xs-12">{{suggestion.body}}</p>
                 </div>
-            </a>
-        </div>
+            </div>
+        </a>
     </div>
 </div>
 <p ng-show="!hasSuggestions()" class="text-center" ><em>No suggestions so far... ;( Be the first to add one!</em></p>
