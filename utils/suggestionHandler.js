@@ -26,7 +26,8 @@ var handler = {
             body: options.body,
             likes: [], dislikes: [],
             createdAt: new Date(),
-            state: "open"
+            state: "open",
+            updates: []
         }, callback );
     },
     getSuggestion: function(id, callback) {
@@ -65,6 +66,16 @@ var handler = {
 
         this.getSuggestion(suggestion._id, callback);
 
+    },
+    update: function(suggestion, callback) {
+        mongo.getDb().collection('suggestions').update(
+            {_id: mongo.getObjectID(suggestion._id)},
+            {
+                $push: {"updates": suggestion.update}
+            }
+        );
+
+        this.getSuggestion(suggestion._id, callback);
     },
     delete: function(id) {
         mongo.getDb().collection('suggestions').remove({

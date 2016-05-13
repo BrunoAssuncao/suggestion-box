@@ -1,16 +1,16 @@
-<div class="overlay" ng-show="deleteWarning">
+<div class="overlay" ng-if="isAdmin" ng-show="deleteWarning">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" ng-click="deleteWarning = false;" aria-hidden="true">&times;</button>
+        <button type="button" class="close" ng-click="showDelete(false)" aria-hidden="true">&times;</button>
         <h4 class="modal-title">Warning</h4>
       </div>
       <div class="modal-body">
         <p>Are you sure you want to permanently delete this suggestion?</p>
       </div>
       <div class="modal-footer">
-          <a  class="deleteSuggestion" href="javascript:void();" ng-click="deleteSuggestion()">Delete</a>
-          <button type="button" class="btn button" ng-click="deleteWarning = false;">close</button>
+          <a  class="deleteSuggestion" href="javascript:void(0);" ng-click="deleteSuggestion()">Delete</a>
+          <button type="button" class="btn button" ng-click="showDelete(false)">close</button>
       </div>
     </div>
   </div>
@@ -21,8 +21,8 @@
         <a class="btn button" ng-href="/#/">Back to list</a>
     </div>
 </div>
-<div class="list-group">
-    <a class="list-group-item">
+<section class="list-group">
+    <div class="list-group-item">
         <div class="row">
             <div class="col-xs-12 col-sm-1 voteSection">
                 <i class="fa fa fa-arrow-up vote" ng-click="suggestion.vote = 'like'; proccessVote();" ng-class="{voted: suggestion.vote == 'like' }" aria-hidden="true"> </i>
@@ -39,8 +39,8 @@
                 </div>
                 <div class="row">
                     <p class=" col-xs-12 list-group-item-text">{{suggestion.body}}</p>
-                    <form id="stateForm" class="col-xs-12" ng-show="isAdmin">
-                        <button class="btn button pull-right" ng-click="deleteWarning = true;" >Delete suggestion</button>
+                    <form id="stateForm" class="col-xs-12" ng-if="isAdmin">
+                        <button class="btn button pull-right" ng-click="showDelete(true)" >Delete suggestion</button>
                         <select ng-model="suggestion.state" ng-change="changeState()">
                             <option ng-repeat="state in states" value="{{state.state}}" ng-selected="suggestion.state === state.state">
                                 {{state.state}}
@@ -50,5 +50,28 @@
                 </div>
             </div>
         </div>
-    </a>
+    </div>
+</section>
+<section ng-if="hasUpdates" class="list-group updates">
+    <div class="list-group-item update" ng-repeat="update in suggestion.updates">
+        <div class="row">
+            <div class="hidden-xs col-sm-1">
+            </div>
+            <div class="col-xs-12 col-sm-11">
+                <p class="createdBy">updated by: {{update.user}} | {{update.date | date:"MM/dd/yyyy @ h:mma"}}</p>
+                <p class="list-group-item-text">{{update.body}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div ng-if="isAdmin">
+    <button class="btn button pull-right" ng-show="!isUpdating" ng-click="showUpdate(true)">Update</button>
+    <form  name="updateForm" ng-show="isUpdating" ng-submit="updateForm.$valid && updateSuggestion()">
+        <textarea id="update" class="col-xs-12" ng-model="suggestion.update.body" name="body" placeholder="Update" required></textarea>
+        <div class="row-fluid">
+            <a class="btn" ng-href="javascript:void(0);" ng-click="showUpdate(false)">Cancel</a>
+            <input class="btn button" ng-class="{ disabled: !updateForm.$valid }" ng-click="updateForm.$valid || showUpdate(false)" type="submit" value="Submit" />
+        </div>
+    </form>
 </div>

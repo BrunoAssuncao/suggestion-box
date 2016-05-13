@@ -22,13 +22,14 @@ angular.module('suggestionbox')
     })
 
     .controller('SuggestionDetailController', function($scope, $routeParams, $location, $timeout, $http, Suggestion) {
+        $scope.deleteWarning = false;
+        $scope.isUpdating = false;
         var suggestion = new Suggestion.suggestions.get({id: $routeParams.id}, function() {
             $scope.suggestion = suggestion;
             $scope.data = {};
             $scope.username = suggestion.username;
             $scope.getVote($scope.suggestion);
-            $scope.deleteWarning = false;
-
+            $scope.hasUpdates = $scope.suggestion.updates.length > 0;
 
             Suggestion.states().success( function(data) {
                 $scope.states = data;
@@ -49,6 +50,15 @@ angular.module('suggestionbox')
             $scope.saveSuggestion("state");
         };
 
+        $scope.updateSuggestion = function() {
+            $scope.suggestion.update.user = $scope.suggestion.username;
+            $scope.suggestion.update.date = new Date();
+            $scope.isUpdating = false;
+            $scope.saveSuggestion("update");
+
+            $scope.hasUpdates = true;
+        };
+
         $scope.saveSuggestion = function(action){
             $scope.suggestion.action = action;
             $scope.suggestion.$save({}, function(data, headers) {
@@ -59,10 +69,14 @@ angular.module('suggestionbox')
             });
         };
 
+        $scope.test = function() {
+            alert($scope.deleteWarning);
+        };
+
         $scope.deleteSuggestion = function() {
             $scope.suggestion.$delete();
-            $scope.deleteWarning = false;
-            $location.path('/');
+                $scope.deleteWarning = false;
+                $location.path('/');
         };
 
         $scope.getVote = function(suggestion) {
@@ -72,9 +86,19 @@ angular.module('suggestionbox')
             $scope.suggestion.vote = $scope.suggestion.previousVote;
         };
 
+        $scope.showDelete = function(show) {
+            $scope.deleteWarning = show;
+        };
+
+        $scope.showUpdate = function(show) {
+            $scope.isUpdating = show;
+        };
+
         function getSuggestionScore(suggestion) {
             return suggestion.likes.length - suggestion.dislikes.length;
         }
+
+
     })
 
     .controller('NewSuggestionController', function(Suggestion) {

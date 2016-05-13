@@ -100,8 +100,7 @@ router.post('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     suggestionHandler.delete(req.params.id, function(err, docs) {
-        console.log("Suggestion " + req.params.id + " deleted!" );
-        res.json("deleted");
+        res.json("Suggestion " + req.params.id + " deleted!");
     });
 });
 
