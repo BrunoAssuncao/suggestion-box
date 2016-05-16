@@ -82,8 +82,6 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/:id', (req, res) => {
-    console.log(req.body);
-
     var suggestion = req.body;
     suggestionHandler[suggestion.action](suggestion, function(err, docs){
         if(err) {
@@ -91,7 +89,6 @@ router.post('/:id', (req, res) => {
             res.json(err);
         }
         else {
-            console.log(docs);
             docs.username = req.session.username;
             res.json(docs);
         }
