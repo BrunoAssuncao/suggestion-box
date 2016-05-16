@@ -1,4 +1,5 @@
 var mongo = require('../utils/mongoUtils');
+var slack = require('../utils/slackIntegration');
 
 var handler = {
     getSuggestions: function(callback) {
@@ -72,6 +73,20 @@ var handler = {
             {_id: mongo.getObjectID(suggestion._id)},
             {
                 $push: {"updates": suggestion.update}
+            },
+            function(err, doc) {
+                if(err) {
+                    console.log(err);
+                }
+                else {
+                    slack.slackChannel("Suggestion: " + suggestion.title + " has been updated - http://localhost:8181/#/suggestion/"+ suggestion._id, function(error, response, body){
+                        if (!error && response.statusCode == 200) {
+                            console.log("success");
+                        } else {
+                            console.log('error: '+ response.statusCode + ' ' + body);
+                        }
+                    });
+                }
             }
         );
 
@@ -81,6 +96,25 @@ var handler = {
         mongo.getDb().collection('suggestions').remove({
             _id: mongo.getObjectID(id)
         });
+    },
+    getMostVoted: function(callback) {
+        mongo.getDb().collection('suggestions').aggregate([
+        {
+              $project : {
+                  title: "$title",
+                  body: "$body",
+                  creator: "$creator",
+                  score: { $subtract: [
+                      { $size: { "$ifNull": [ "$likes", [] ] } },
+                      { $size: { "$ifNull": [ "$dislikes", [] ] } }
+                  ] }
+              }
+          },
+          {
+              $sort: { "score":-1 }
+          }
+      ])
+      .limit(1).next(callback);
     }
 };
 
