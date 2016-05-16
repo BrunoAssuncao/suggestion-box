@@ -63,10 +63,11 @@ body {
              }
           }
 
-          textarea {
+          textarea, .ta-editor {
               padding: 10px;
-              min-height: 8em;
+              min-height: 250px;
               border: 1px solid lightgray;
+              border-radius: 0;
 
               &:focus {
                   border: 1px solid $orange;
@@ -83,6 +84,10 @@ body {
 
       .createdBy {
           text-align: right;
+      }
+
+      .suggestionBody {
+          margin: 15px 0;
       }
 
       #stateForm {
@@ -196,7 +201,7 @@ body {
             }
         }
     }
-    .btn{
+    .fullWidthXs, .button {
         width: 100%;
     }
     .deleteSuggestion {

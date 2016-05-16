@@ -54,6 +54,7 @@ angular.module('suggestionbox')
             $scope.suggestion.update.user = $scope.suggestion.username;
             $scope.suggestion.update.date = new Date();
             $scope.isUpdating = false;
+            console.log($scope.suggestion);
             $scope.saveSuggestion("update");
 
             $scope.hasUpdates = true;
@@ -67,10 +68,6 @@ angular.module('suggestionbox')
             }, function(data, headers) {
                 console.log(data);
             });
-        };
-
-        $scope.test = function() {
-            alert($scope.deleteWarning);
         };
 
         $scope.deleteSuggestion = function() {

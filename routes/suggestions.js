@@ -2,7 +2,7 @@ var router = require('express').Router();
 var mongo = require('../utils/mongoUtils');
 var suggestionHandler = require('../utils/suggestionHandler');
 var request = require('request');
-var collection = undefined;
+var collection;
 
 
 //GET ALL SUGGESTIONS
@@ -15,7 +15,7 @@ router.get('/', function(req, res) {
         else {
             res.json(docs);
         }
-    })
+    });
 });
 
 //SUBMIT NEW SUGGESTION
@@ -39,7 +39,7 @@ router.post('/', function (req, res) {
                res.json(result);
            }
        }
-    })
+   });
 });
 
 router.get('/states', (req, res) => {

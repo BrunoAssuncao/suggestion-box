@@ -7,9 +7,10 @@
         <label for="title" class="sr-only">Title</label>
         <input id="title" class="col-xs-12" name="title" placeholder="Title" ng-model="newCtrl.suggestion.title" required>
         <label for="body" class="sr-only">Description</label>
-        <textarea id="body" class="col-xs-12" name="body" placeholder="Description" ng-model="newCtrl.suggestion.body" required></textarea>
+        <div text-angular text-angular-name="newSuggestion" ng-model="newCtrl.suggestion.body" name="body" required>
+        </div>
         <div class="row-fluid">
-            <a class="btn" ng-href="#/">Cancel</a>
+            <a class="btn fullWidthXs" ng-href="#/">Cancel</a>
             <input class="btn button" ng-class="{ disabled: !suggestionForm.$valid }" type="submit" value="Submit" />
         </div>
     </form>

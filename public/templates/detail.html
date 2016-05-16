@@ -38,7 +38,7 @@
                     <p class="col-xs-12 col-sm-5 createdBy">created by: {{suggestion.creator}} | {{suggestion.createdAt | date:"MM/dd/yyyy @ h:mma"}}</p>
                 </div>
                 <div class="row">
-                    <p class=" col-xs-12 list-group-item-text">{{suggestion.body}}</p>
+                    <div class="col-xs-12 suggestionBody list-group-item-text" ng-bind-html="suggestion.body">{{suggestion.body}}</div>
                     <form id="stateForm" class="col-xs-12" ng-if="isAdmin">
                         <button class="btn button pull-right" ng-click="showDelete(true)" >Delete suggestion</button>
                         <select ng-model="suggestion.state" ng-change="changeState()">
@@ -59,7 +59,7 @@
             </div>
             <div class="col-xs-12 col-sm-11">
                 <p class="createdBy">updated by: {{update.user}} | {{update.date | date:"MM/dd/yyyy @ h:mma"}}</p>
-                <p class="list-group-item-text">{{update.body}}</p>
+                <div class="list-group-item-text" ng-bind-html="update.body"></div>
             </div>
         </div>
     </div>
@@ -68,9 +68,10 @@
 <div ng-if="isAdmin">
     <button class="btn button pull-right" ng-show="!isUpdating" ng-click="showUpdate(true)">Update</button>
     <form  name="updateForm" ng-show="isUpdating" ng-submit="updateForm.$valid && updateSuggestion()">
-        <textarea id="update" class="col-xs-12" ng-model="suggestion.update.body" name="body" placeholder="Update" required></textarea>
+        <div text-angular text-angular-name="test" ng-model="suggestion.update.body" name="body" required>
+        </div>
         <div class="row-fluid">
-            <a class="btn" ng-href="javascript:void(0);" ng-click="showUpdate(false)">Cancel</a>
+            <a class="btn fullWidthXs" ng-href="javascript:void(0);" ng-click="showUpdate(false)">Cancel</a>
             <input class="btn button" ng-class="{ disabled: !updateForm.$valid }" ng-click="updateForm.$valid || showUpdate(false)" type="submit" value="Submit" />
         </div>
     </form>
