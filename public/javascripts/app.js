@@ -1,4 +1,4 @@
-angular.module('suggestionbox', ['ngRoute', 'ngResource']);
+angular.module('suggestionbox', ['ngRoute', 'ngResource', 'textAngular']);
 
 
 /* UTILS BELOW */

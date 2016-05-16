@@ -2,27 +2,39 @@
 <html>
 <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/login.css'/>
     <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css"
           crossorigin="anonymous">
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel='stylesheet' href='/stylesheets/login.css'/>
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+
 </head>
 <body>
-
-<header>
-    <h1 class="text-center" ><%= title %></h1>
-</header>
-
-<form method="POST" action="/login" class="form-signin">
-    <h2 class="form-signin-heading"><%= title2 %></h2>
-    <label for="username" class="sr-only">Username</label>
-    <input id="username" name="username" placeholder="Username">
-    <label for="password" class="sr-only">Password</label>
-    <input id="password" name="password" type="password" placeholder="Password">
-    <button class="btn btn-lg btn-primary btn-block" type="Submit">log in</button>
-</form>
-
-<footer>This is the footer</footer>
+<div class="container mainContainer" >
+    <header class="row">
+        <img class="logo" src="/assets/enear-logo1.png" title="enear" alt="enear"/>
+        <h1 class="text-center col-xs-12" ><%= title %></h1>
+    </header>
+    <div class="row">
+        <div class="col-xs-12">
+            <form method="POST" action="/login" class="form-signin">
+                <input type="hidden" name="redirectTo" value="/#<%= redirectTo %>" />
+                <h2 class="form-signin-heading"><%= title2 %></h2>
+                <label for="username" class="sr-only">Username</label>
+                <input id="username" name="username" placeholder="Username">
+                <label for="password" class="sr-only">Password</label>
+                <input id="password" name="password" type="password" placeholder="Password">
+                <button class="button btn btn-lg btn-primary" type="Submit">log in</button>
+            </form>
+        </div>
+    </div>
+</div>
+<footer class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            This is the footer
+        </div>
+    </div>
+</footer>
 
 <script src="https://code.jquery.com/jquery-2.2.3.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js" crossorigin="anonymous"></script>

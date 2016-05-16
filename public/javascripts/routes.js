@@ -17,5 +17,4 @@ angular.module('suggestionbox')
             controllerAs: 'newCtrl'
         })
         .otherwise( { redirectTo: '/' } );
-
     });

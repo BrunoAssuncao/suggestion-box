@@ -12,7 +12,7 @@ module.exports = function( grunt ) {
         },
         watch: {
             server: {
-                files: ['app.js', 'config.js', 'Gruntfile.js', 'routes/*.js', 'utils/*.js'],
+                files: ['app.js', 'config.js', 'Gruntfile.js', 'routes/*.js', 'utils/*.js', 'public/**/*', 'views/*'],
                 tasks: ['express:dev'],
                 options: {
                     spawn: false

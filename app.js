@@ -10,7 +10,11 @@ var userSession = require('./utils/userSession');
 
 var mainRouter = require('./routes/main');
 var suggestionsRouter = require('./routes/suggestions');
+
 var slack = require('./utils/slackIntegration');
+var votingRouter = require('./routes/vote');
+
+
 
 var app = express();
 
@@ -36,6 +40,7 @@ mongo.connect(( db ) => {
     app.use(express.static(path.join(__dirname, 'public')));
 
     app.use('/suggestions', suggestionsRouter);
+    app.use('/vote', votingRouter);
     app.use('/', mainRouter);
 
 // catch 404 and forward to error handler
