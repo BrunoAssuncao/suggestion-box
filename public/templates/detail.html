@@ -1,5 +1,5 @@
 <div class="overlay" ng-if="isAdmin" ng-show="deleteWarning">
-  <div class="modal-dialog">
+  <div class="modal-dialog" id="deleteWarning">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" ng-click="showDelete(false)" aria-hidden="true">&times;</button>
@@ -68,7 +68,7 @@
 <div ng-if="isAdmin">
     <button class="btn button pull-right" ng-show="!isUpdating" ng-click="showUpdate(true)">Update</button>
     <form  name="updateForm" ng-show="isUpdating" ng-submit="updateForm.$valid && updateSuggestion()">
-        <div text-angular text-angular-name="test" ng-model="suggestion.update.body" name="body" required>
+        <div id="textAngular" text-angular text-angular-name="test" ng-model="suggestion.update.body" name="body" required>
         </div>
         <div class="row-fluid">
             <a class="btn fullWidthXs" ng-href="javascript:void(0);" ng-click="showUpdate(false)">Cancel</a>

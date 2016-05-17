@@ -8,16 +8,24 @@ html, body {
 
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: $orange;
+  // background-color: rgba(238, 102, 38, 0.8);
+  background-color: transparent;
+  background: linear-gradient(rgba(238, 102, 38, 0.6), rgba(238, 102, 38, 0.6)), url("../assets/background.jpg") no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 
   .largeContainer {
       min-height:100%;
   }
   .mainContainer {
-      background-color: #fff;
+      background-color: rgba(265, 265, 265, 0.6);
       min-height: 100%;
       margin-bottom: -56px;
       position: relative;
+
+      * {
+          background-color: transparent;
+      }
 
       &::after {
           content: "";
@@ -53,6 +61,7 @@ body {
               padding: 10px;
               border: 1px solid lightgray;
               margin: 1em 0;
+              background-color: #fff;
 
              &:focus {
                  outline: 0;
@@ -68,6 +77,7 @@ body {
               min-height: 250px;
               border: 1px solid lightgray;
               border-radius: 0;
+              background-color: #fff;
 
               &:focus {
                   border: 1px solid $orange;
@@ -88,6 +98,11 @@ body {
 
       .suggestionBody {
           margin: 15px 0;
+      }
+
+      #textAngular button,
+      #deleteWarning {
+          background-color: #fff;
       }
 
       #stateForm {
@@ -177,14 +192,13 @@ body {
       padding-top: 25px;
       padding-bottom: 15px;
       text-align: center;
-      background-color: #fff;
-
   }
 }
 
 
 @media (max-width: 768px ) {
     body {
+        background: #fff;
         .mainContainer {
             .createdBy {
                 text-align: left;
