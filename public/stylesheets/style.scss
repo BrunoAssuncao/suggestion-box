@@ -13,6 +13,11 @@ body {
   // background-size: cover;
   // background-attachment: fixed;
 
+  header {
+      padding: 15px 0;
+      background-color: $lightGray;
+      z-index: 1000;
+  }
   .largeContainer {
       min-height:100%;
   }
@@ -31,11 +36,6 @@ body {
           display: block;
           height: 46px;
       }
-      header {
-          padding: 15px 0;
-          background-color: $lightGray;
-          z-index: 1000;
-      }
 
       .overlay {
           position: absolute;
@@ -46,8 +46,6 @@ body {
           z-index: 100;
           background-color:  rgba(0, 0, 0, 0.2);
       }
-
-
 
       form {
           min-width: 300px;
@@ -191,6 +189,27 @@ body {
 #dashboard {
     background-color: $darkGray;
     color: $white;
+    position:fixed;
+    width: $dashboardWidth;
+    min-height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    padding-top: $stdMargin;
+
+    .dashBoardSection {
+        margin-top: $stdMargin;
+    }
+
+    #user {
+        font-size: 40px;
+        display: block;
+
+    }
+}
+
+#contentWrapper {
+    padding-left: $dashboardWidth;
 }
 
  footer {

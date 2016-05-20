@@ -10,21 +10,27 @@
 </head>
 <body>
 <div class="container-fluid mainContainer">
-    <header class="row">
-        <div class="col-xs-2 text-center">
-            <a href="/#/"><img src="/assets/enear-logo1.png" alt="Home" title="Home" /> </a>
-            <!-- <h1 class="text-center"><%= title %></h1> -->
+        <header class="row">
+            <div class="col-xs-12 text-center">
+                <h1 class="text-center"><%= title %></h1>
+            </div>
+        </header>
+        <div id="dashboard">
+            <div class="col-xs-12 text-center dashBoardSection">
+                <a href="/#/"><img src="/assets/enear-logo1.png" alt="Home" title="Home" /> </a>
+            </div>
+            <div class="col-xs-12 dashBoardSection text-center">
+                <i class="fa fa-user " id="user" aria-hidden="true">&nbsp;</i>
+                 <%= username %>. <br />
+                <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
+            </div>
+            <div class="col-xs-12 dashBoardSection">
+                <a href="/#/">Suggestions</a>
+            </div>
         </div>
-        <div class="col-xs-10 text-right" >
-            You are logged as: <%= username %>. <a href="/logout">Logout</a>
-        </div>
-    </header>
-    <div class="row">
-        <div class="col-xs-2" id="dashboard">
-            <a href="#">home</a>
-        </div>
-        <div class="col-xs-10">
+        <div id="contentWrapper">
             <div ng-view></div>
+
         </div>
 </div>
 <footer class="container">
