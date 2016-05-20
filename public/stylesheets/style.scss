@@ -7,11 +7,11 @@ html, body {
 }
 
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: transparent;
-  background: linear-gradient(rgba(238, 102, 38, 0.6), rgba(238, 102, 38, 0.6)), url("../assets/background.jpg") no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
+  // font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  // background-color: transparent;
+  // background: linear-gradient(rgba(238, 102, 38, 0.6), rgba(238, 102, 38, 0.6)), url("../assets/background.jpg") no-repeat;
+  // background-size: cover;
+  // background-attachment: fixed;
 
   .largeContainer {
       min-height:100%;
@@ -32,8 +32,9 @@ body {
           height: 46px;
       }
       header {
-          padding-top: 25px;
-          padding-bottom: 15px;
+          padding: 15px 0;
+          background-color: $lightGray;
+          z-index: 1000;
       }
 
       .overlay {
@@ -186,6 +187,11 @@ body {
           font-size: 12px;
       }
   }
+
+#dashboard {
+    background-color: $darkGray;
+    color: $white;
+}
 
  footer {
       padding-top: 25px;
