@@ -2,17 +2,17 @@ angular.module('suggestionbox')
     .config(function($routeProvider){
 
         $routeProvider.when('/', {
-            templateUrl: 'templates/main.html',
+            templateUrl: 'suggestions/list/main.html',
             controller: 'SuggestionsListController',
             controllerAs: 'suggestionsListCtrl'
         })
         .when('/suggestion/:id', {
-            templateUrl: 'templates/detail.html',
+            templateUrl: 'suggestions/detail/detail.html',
             controller: 'SuggestionDetailController',
             controllerAs: 'suggestionsDetailCtrl'
         })
         .when('/new', {
-            templateUrl: 'templates/new.html',
+            templateUrl: 'suggestions/new/new.html',
             controller: 'NewSuggestionController',
             controllerAs: 'newCtrl'
         })
