@@ -78,6 +78,7 @@ body {
               border: 1px solid lightgray;
               border-radius: 0;
               background-color: #fff;
+              overflow-y: scroll;
 
               &:focus {
                   border: 1px solid $orange;
@@ -243,6 +244,10 @@ body {
             .burgerMenu {
                   margin-right: $gutter;
                   display:inline-block;
+            }
+
+             .title{
+                 font-size: 16px;
             }
         }
         .mainContainer {
