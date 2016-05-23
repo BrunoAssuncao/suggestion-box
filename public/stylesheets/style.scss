@@ -199,6 +199,7 @@ body {
     z-index: 100;
     padding-top: $spacing;
     margin-top: $headerHeight;
+    transition: all $standardDuration;
 
     .dashBoardSection {
         margin-bottom: $spacing;
@@ -261,7 +262,11 @@ body {
         }
 
         #dashboard {
-            display: none;
+            left: - $dashboardWidth;
+
+            &.visible {
+                left: 0;
+            }
         }
 
         #contentWrapper {

@@ -10,9 +10,9 @@
         <a class="list-group-item suggestion" ng-href="#/suggestion/{{suggestion._id}}"
             ng-repeat="suggestion in suggestions | orderBy:'[ -score, -createdAt]'">
             <div class="col-xs-12 col-sm-1">
-                <p class="list-group-item-text"
+                <p class="list-group-item-text text-center"
                 ng-class="{negative:suggestion.score < 0, positive:suggestion.score > 0}">
-                Score: {{suggestion.score}}
+                Score: <br/> {{suggestion.score}}
                 </p>
             </div>
             <div class="col-xs-12 col-sm-11">
