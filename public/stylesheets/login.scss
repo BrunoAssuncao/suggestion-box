@@ -2,10 +2,6 @@
 @import "config.scss";
 html, body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: transparent;
-  background: linear-gradient(rgba(238, 102, 38, 0.6), rgba(238, 102, 38, 0.6)), url("../assets/background.jpg") no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
   height: 100%;
 
   .mainContainer {
@@ -77,7 +73,7 @@ html, body {
        text-align: center;
   }
 
-  
+
 }
 
 @media (max-width: 768px ) {
