@@ -7,29 +7,31 @@ html, body {
 }
 
 body {
-  // font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  // background-color: transparent;
-  // background: linear-gradient(rgba(238, 102, 38, 0.6), rgba(238, 102, 38, 0.6)), url("../assets/background.jpg") no-repeat;
-  // background-size: cover;
-  // background-attachment: fixed;
-
   header {
-      padding: 15px 0;
-      background-color: $lightGray;
+      padding: $gutter 0;
       z-index: 1000;
+      position: fixed;
+      width: 100%;
+      background-color: $white;
+      color: $black;
+
+      .burgerMenu {
+            display:none;
+      }
+
+      .title{
+          margin: 0;
+          font-size: $titleFontSize;
+      }
   }
   .largeContainer {
       min-height:100%;
   }
   .mainContainer {
-      background-color: rgba(265, 265, 265, 0.6);
+      background-color: #f2f2f2;
       min-height: 100%;
       margin-bottom: -56px;
       position: relative;
-
-      * {
-          background-color: transparent;
-      }
 
       &::after {
           content: "";
@@ -95,7 +97,7 @@ body {
       }
 
       .suggestionBody {
-          margin: 15px 0;
+          margin: $gutter 0;
       }
 
       #textAngular button,
@@ -151,11 +153,11 @@ body {
       }
 
       .btn {
-          margin: 15px 0;
+          margin: $gutter 0;
       }
 
       .listTitle {
-          margin: 15px 0;
+          margin: $gutter 0;
       }
 
       .button {
@@ -189,16 +191,25 @@ body {
 #dashboard {
     background-color: $darkGray;
     color: $white;
-    position:fixed;
+    position: fixed;
     width: $dashboardWidth;
     min-height: 100%;
     top: 0;
     left: 0;
     z-index: 100;
-    padding-top: $stdMargin;
+    padding-top: $spacing;
+    margin-top: $headerHeight;
 
     .dashBoardSection {
-        margin-top: $stdMargin;
+        margin-bottom: $spacing;
+        * {
+            color: $white;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+        }
     }
 
     #user {
@@ -209,13 +220,16 @@ body {
 }
 
 #contentWrapper {
+    margin-top: $headerHeight;
     padding-left: $dashboardWidth;
 }
 
  footer {
-      padding-top: 25px;
-      padding-bottom: 15px;
-      text-align: center;
+      padding-top: $gutter;
+      padding-bottom:$gutter;
+      .footerText {
+          padding-left: $dashboardWidth;
+      }
   }
 }
 
@@ -223,6 +237,13 @@ body {
 @media (max-width: 768px ) {
     body {
         background: #fff;
+
+        header {
+            .burgerMenu {
+                  margin-right: $gutter;
+                  display:inline-block;
+            }
+        }
         .mainContainer {
             .createdBy {
                 text-align: left;
@@ -238,6 +259,20 @@ body {
                 }
             }
         }
+
+        #dashboard {
+            display: none;
+        }
+
+        #contentWrapper {
+            padding-left: 0;
+        }
+
+        footer {
+            .footerText {
+                padding-left: 0;
+            }
+        }
     }
     .fullWidthXs, .button {
         width: 100%;
@@ -245,4 +280,5 @@ body {
     .deleteSuggestion {
         width: 100%;
     }
+
 }
