@@ -137,6 +137,7 @@ body {
           .vote {
               cursor: pointer;
               display: block;
+              font-size: 24px;
           }
 
           .voted {
@@ -241,9 +242,20 @@ body {
         background: #fff;
 
         header {
+            padding: 10px 0;
+
             .burgerMenu {
                   margin-right: $gutter;
                   display:inline-block;
+                  color: $orange;
+                  text-decoration: none;
+                  border: 1px solid $orange;
+                  padding: 5px 10px;
+
+                  &.open {
+                      background-color: $orange;
+                      color: $white;
+                  }
             }
 
              .title{
