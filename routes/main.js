@@ -10,7 +10,6 @@ router.get('/login', function (req, res) {
 
 //login POST
 router.post('/login', function(req, res) {
-
     var loginData = {
         webmailHost: process.env.WEBMAIL_HOST,
         username: req.body.username,

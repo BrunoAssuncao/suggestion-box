@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="login">
 <head>
     <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no">
 
@@ -11,34 +11,39 @@
 
 </head>
 <body>
-<div class="container mainContainer" >
+<div class="container mainContainer" ng-controller="LoginController">
     <header class="row">
         <img class="logo" src="/assets/enear-logo1.png" title="enear" alt="enear"/>
         <h1 class="text-center col-xs-12" ><%= title %></h1>
     </header>
     <div class="row">
         <div class="col-xs-12">
-            <form method="POST" action="/login" class="form-signin">
+            <form method="POST" action="/login" name="loginForm" class="form-signin" ng-submit="login-form.$valid">
                 <input type="hidden" name="redirectTo" value="/#<%= redirectTo %>" />
                 <h2 class="form-signin-heading"><%= title2 %></h2>
                 <label for="username" class="sr-only">Username</label>
-                <input id="username" name="username" placeholder="Username">
+                <input  id="username" name="username" placeholder="Username" required>
                 <label for="password" class="sr-only">Password</label>
-                <input id="password" name="password" type="password" placeholder="Password">
-                <button class="button btn btn-lg btn-primary" type="Submit">log in</button>
+                <input id="password" name="password" type="password" placeholder="Password" required>
+                <button class="button btn btn-lg btn-primary" ng-class="{ disabled: !suggestionForm.$valid }" type="Submit">log in</button>
             </form>
         </div>
     </div>
 </div>
+
 <footer class="container">
     <div class="row">
         <div class="col-xs-12">
-            This is the footer
+            Open Source - code: <a href="//github.com/BrunoAssuncao/suggestion-box">suggestion-box</a>
         </div>
     </div>
 </footer>
 
 <script src="https://code.jquery.com/jquery-2.2.3.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular.min.js"
+        crossorigin="anonymous"></script>
+<script src="/login/login.js"></script>
+
 </body>
 </html>
