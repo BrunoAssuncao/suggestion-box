@@ -25,9 +25,7 @@ var server = http.createServer(app);
  */
 
 var ip = process.env.IP_ADDRESS || 'localhost';
-server.listen(port, ip, function() {
-    console.log('listening to port: ' + port);
-});
+server.listen(port, ip);
 server.on('error', onError);
 server.on('listening', onListening);
 
