@@ -12,7 +12,6 @@ var slack = require('../jobs/slack');
 /**
  * Get port from environment and store in Express.
  */
-
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
@@ -26,10 +25,9 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port, function() {
-    console.log('listening to port ' + port);
-    slack.startJob();
-});
+var ip = process.env.IP_ADDRESS || 'localhost';
+server.listen(port, ip);
+
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -90,5 +88,5 @@ function onListening() {
     var bind = typeof addr === 'string'
         ? 'pipe ' + addr
         : 'port ' + addr.port;
-    debug('Listening on ' + bind);
+    console.log('Listening on ' + JSON.stringify(addr) );
 }
