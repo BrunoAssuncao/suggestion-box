@@ -1,5 +1,20 @@
+//colors
+$white:  #fff;
+$black: #000;
+
+$darkGray: #434343;
+$lightGray: #bcbcbc ;
+$whiteSmoke: #f2f2f2;
 
 $orange: #EE6626;
 
+//measures
+$gutter: 15px;
+$spacing: $gutter * 2;
+$dashboardWidth: 250px;
+
+$titleFontSize: 20px;
+$headerHeight: ($titleFontSize + ($gutter * 2) + 4);
+
 //transitions duration:
-$standardDuration: 0.25s; 
+$standardDuration: 0.25s;

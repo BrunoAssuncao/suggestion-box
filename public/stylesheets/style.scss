@@ -7,14 +7,28 @@ html, body {
 }
 
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: $orange;
+  header {
+      padding: $gutter 0;
+      z-index: 1000;
+      position: fixed;
+      width: 100%;
+      background-color: $white;
+      color: $black;
 
+      .burgerMenu {
+            display:none;
+      }
+
+      .title{
+          margin: 0;
+          font-size: $titleFontSize;
+      }
+  }
   .largeContainer {
       min-height:100%;
   }
   .mainContainer {
-      background-color: #fff;
+      background-color: #f2f2f2;
       min-height: 100%;
       margin-bottom: -56px;
       position: relative;
@@ -24,12 +38,8 @@ body {
           display: block;
           height: 46px;
       }
-      header {
-          padding-top: 25px;
-          padding-bottom: 15px;
-      }
 
-      .overlay{
+      .overlay {
           position: absolute;
           left: 0;
           top: 0;
@@ -38,8 +48,6 @@ body {
           z-index: 100;
           background-color:  rgba(0, 0, 0, 0.2);
       }
-
-
 
       form {
           min-width: 300px;
@@ -53,6 +61,7 @@ body {
               padding: 10px;
               border: 1px solid lightgray;
               margin: 1em 0;
+              background-color: #fff;
 
              &:focus {
                  outline: 0;
@@ -68,6 +77,8 @@ body {
               min-height: 250px;
               border: 1px solid lightgray;
               border-radius: 0;
+              background-color: #fff;
+              overflow-y: scroll;
 
               &:focus {
                   border: 1px solid $orange;
@@ -87,7 +98,12 @@ body {
       }
 
       .suggestionBody {
-          margin: 15px 0;
+          margin: $gutter 0;
+      }
+
+      #textAngular button,
+      #deleteWarning {
+          background-color: #fff;
       }
 
       #stateForm {
@@ -121,6 +137,7 @@ body {
           .vote {
               cursor: pointer;
               display: block;
+              font-size: 24px;
           }
 
           .voted {
@@ -138,11 +155,11 @@ body {
       }
 
       .btn {
-          margin: 15px 0;
+          margin: $gutter 0;
       }
 
       .listTitle {
-          margin: 15px 0;
+          margin: $gutter 0;
       }
 
       .button {
@@ -173,18 +190,79 @@ body {
       }
   }
 
- footer {
-      padding-top: 25px;
-      padding-bottom: 15px;
-      text-align: center;
-      background-color: #fff;
+#dashboard {
+    background-color: $darkGray;
+    color: $white;
+    position: fixed;
+    width: $dashboardWidth;
+    min-height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    padding-top: $spacing;
+    margin-top: $headerHeight;
+    transition: all $standardDuration;
 
+    .dashBoardSection {
+        margin-bottom: $spacing;
+        * {
+            color: $white;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+    }
+
+    #user {
+        font-size: 40px;
+        display: block;
+
+    }
+}
+
+#contentWrapper {
+    margin-top: $headerHeight;
+    padding-left: $dashboardWidth;
+}
+
+ footer {
+      padding-top: $gutter;
+      padding-bottom:$gutter;
+      .footerText {
+          padding-left: $dashboardWidth;
+      }
   }
 }
 
 
 @media (max-width: 768px ) {
     body {
+        background: #fff;
+
+        header {
+            padding: 10px 0;
+
+            .burgerMenu {
+                  margin-right: $gutter;
+                  display:inline-block;
+                  color: $orange;
+                  text-decoration: none;
+                  border: 1px solid $orange;
+                  padding: 5px 10px;
+                  transition: all $standardDuration;
+
+                  &.open {
+                      background-color: $orange;
+                      color: $white;
+                  }
+            }
+
+             .title{
+                 font-size: 16px;
+            }
+        }
         .mainContainer {
             .createdBy {
                 text-align: left;
@@ -200,6 +278,24 @@ body {
                 }
             }
         }
+
+        #dashboard {
+            left: - $dashboardWidth;
+
+            &.visible {
+                left: 0;
+            }
+        }
+
+        #contentWrapper {
+            padding-left: 0;
+        }
+
+        footer {
+            .footerText {
+                padding-left: 0;
+            }
+        }
     }
     .fullWidthXs, .button {
         width: 100%;
@@ -207,4 +303,5 @@ body {
     .deleteSuggestion {
         width: 100%;
     }
+
 }

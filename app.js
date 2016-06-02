@@ -10,9 +10,12 @@ var userSession = require('./utils/userSession');
 
 var mainRouter = require('./routes/main');
 var suggestionsRouter = require('./routes/suggestions');
+<<<<<<< HEAD
 
 var slack = require('./jobs/slack');
 var votingRouter = require('./routes/vote');
+=======
+>>>>>>> master
 
 
 

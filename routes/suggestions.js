@@ -56,18 +56,6 @@ router.get('/states', (req, res) => {
     });
 });
 
-router.post('/states', (req, res) => {
-    var suggestion = req.body;
-
-    mongo.getDb().collection('suggestions').update(
-        {_id: mongo.getObjectID(suggestion._id)},
-        {
-            $set: {
-                state: suggestion.state
-            }
-        }
-    );
-});
 
 //GET SPECIFIC SUGGESTION
 router.get('/:id', (req, res) => {
