@@ -17,8 +17,8 @@
         <h1 class="text-center col-xs-12" ><%= title %></h1>
     </header>
     <div class="row">
-        <div class="col-xs-12">
-            <form method="POST" action="/login" class="form-signin">
+        <div class="col-xs-12 text-center">
+            <!-- <form method="POST" action="/login" class="form-signin">
                 <input type="hidden" name="redirectTo" value="/#<%= redirectTo %>" />
                 <h2 class="form-signin-heading"><%= title2 %></h2>
                 <label for="username" class="sr-only">Username</label>
@@ -26,7 +26,10 @@
                 <label for="password" class="sr-only">Password</label>
                 <input id="password" name="password" type="password" placeholder="Password">
                 <button class="button btn btn-lg btn-primary" type="Submit">log in</button>
-            </form>
+            </form> -->
+
+            <a href="/auth/slack"><img src="https://api.slack.com/img/sign_in_with_slack.png" /></a>
+
         </div>
     </div>
 </div>

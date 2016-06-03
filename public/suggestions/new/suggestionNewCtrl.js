@@ -3,7 +3,7 @@ angular.module('suggestionbox')
         this.suggestion = new Suggestion.suggestions();
         this.submitSuggestion = function() {
             this.suggestion.$save().then(function( suggestion ) {
-                window.location = '#/suggestion/' + suggestion.id;
+                window.location = '#/suggestion/' + suggestion._id;
             });
         };
     });

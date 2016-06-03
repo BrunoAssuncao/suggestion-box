@@ -9,6 +9,8 @@ angular.module('suggestionbox')
             $scope.getVote($scope.suggestion);
             $scope.hasUpdates = $scope.suggestion.updates.length > 0;
 
+            console.log($scope.suggestion);
+
             Suggestion.states().success( function(data) {
                 $scope.states = data;
             })
