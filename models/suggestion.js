@@ -15,6 +15,6 @@ suggestionSchema.virtual('score').get(function(){
     return this.likes.length - this.dislikes.length;
 });
 
-//TODO: CREATE VIRTUAL FIELD FOR SCORE
+suggestionSchema.set('toJSON', { virtuals: true });
 
 module.exports = mongoose.model('Suggestion', suggestionSchema);

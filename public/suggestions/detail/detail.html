@@ -28,7 +28,7 @@
                 <i class="fa fa fa-caret-up vote" ng-click="suggestion.vote = 'like'; proccessVote();" ng-class="{voted: suggestion.vote == 'like' }" aria-hidden="true"> </i>
                 <span class="list-group-item-text votes"
                     ng-class="{negative:suggestion.score < 0, positive:suggestion.score > 0}">
-                    <strong> {{score}}</strong>
+                    <strong> {{suggestion.score}}</strong>
                 </span>
                 <i class="fa fa fa-caret-down vote" ng-model="vote" ng-click="suggestion.vote = 'dislike'; proccessVote();" ng-class="{voted: suggestion.vote == 'dislike'}" aria-hidden="true" ></i>
             </div>

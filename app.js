@@ -7,6 +7,7 @@ var session = require('express-session');
 var mongo = require('./utils/mongoUtils');
 var passport = require('passport');
 var suggestionsRouter = require('./routes/suggestions');
+var usersRouter = require('./routes/users');
 var slack = require('./jobs/slack');
 var mongoose = require('mongoose');
 var app = express();
@@ -33,6 +34,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/suggestions', suggestionsRouter);
+app.use('/users', usersRouter);
 
 require('./routes/main')(app, passport);
 

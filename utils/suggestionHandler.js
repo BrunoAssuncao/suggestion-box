@@ -1,5 +1,6 @@
 var mongo = require('../utils/mongoUtils');
 var slack = require('../utils/slackIntegration');
+var Suggestion = require('../models/suggestion');
 
 var handler = {
     getSuggestions: function(callback) {
@@ -32,48 +33,62 @@ var handler = {
         }, callback );
     },
     getSuggestion: function(id, callback) {
-        return mongo.getDb().collection('suggestions').find({_id: mongo.getObjectID(id)}).limit(1).next(callback);
+        Suggestion.findOne({'_id': mongo.getObjectID(id)}, callback);
     },
-    vote: function(suggestion, callback) {
+    vote: function(suggestion, user, res) {
+        //console.log(suggestion);
         var like = suggestion.vote === 'like',
-        //TODO:
-        // toPush = like ? "likes" : "dislikes",  //This is commented out because when this logical was applied to check what array should be pushed,
-                                                  //mongo would create a new array called 'toPush' rather than updating thje like or dislike array.
-        pushQuery = like ?  {"likes": suggestion.username} : {"dislikes": suggestion.username}, //This is not 'DRY' because of the reason described above.
-        pullQuery = like ? {"dislikes": suggestion.username} : {"likes": suggestion.username};
+        pushQuery = like ?  {"likes": user} : {"dislikes": user}, 
+        pullQuery = like ? {"dislikes": user} : {"likes": user};
 
-        mongo.getDb().collection('suggestions').update(
+        console.log("User: " + user);
+        console.log("like ? = " + like);
+        Suggestion.findOneAndUpdate(
             {_id: mongo.getObjectID(suggestion._id)},
             {
-                $addToSet: pushQuery,
+                $push: pushQuery,
                 $pull: pullQuery
+            },
+            {new: true},
+            function(err, doc) {
+                if(err){
+                    console.log(err);
+                    res.json(err);
+                }
+                console.log(doc);
+                res.json(doc);
             }
         );
-
-        //TODO: is this right? Saving it and the retriving the updated item
-        //Why not update it in the frontend and then just saving it
-        this.getSuggestion(suggestion._id, callback);
-
     },
-    state: function(suggestion, callback) {
-        mongo.getDb().collection('suggestions').update(
+    state: function(suggestion, user, res) {
+        Suggestion.findOneAndUpdate(
             {_id: mongo.getObjectID(suggestion._id)},
             {
                 $set: {
                     state: suggestion.state
                 }
+            },
+            {new: true},
+            function(err, doc) {
+                if(err){
+                    console.log(err);
+                    res.json(err);
+                }
+
+                res.json(doc);
             }
         );
 
-        this.getSuggestion(suggestion._id, callback);
+        //this.getSuggestion(suggestion._id, callback);
 
     },
-    update: function(suggestion, callback) {
-        mongo.getDb().collection('suggestions').update(
+    update: function(suggestion, user, res) {
+        Suggestion.findOneAndUpdate(
             {_id: mongo.getObjectID(suggestion._id)},
             {
                 $push: {"updates": suggestion.update}
             },
+            {new: true},
             function(err, doc) {
                 if(err) {
                     console.log(err);
@@ -86,14 +101,16 @@ var handler = {
                             console.log('error: '+ response.statusCode + ' ' + body);
                         }
                     });
+
+                    res.json(doc);
                 }
             }
         );
 
-        this.getSuggestion(suggestion._id, callback);
+        // this.getSuggestion(suggestion._id, callback);
     },
     delete: function(id) {
-        mongo.getDb().collection('suggestions').remove({
+        Suggestion.findOneAndRemove({
             _id: mongo.getObjectID(id)
         });
     },

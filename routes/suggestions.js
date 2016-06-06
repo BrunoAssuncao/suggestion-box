@@ -9,16 +9,6 @@ var collection;
 
 //GET ALL SUGGESTIONS
 router.get('/', function(req, res) {
-    // suggestionHandler.getSuggestions(function(err, docs) {
-    //     if(err){
-    //         console.log(err);
-    //         res.json(err);
-    //     }
-    //     else {
-    //         res.json(docs);
-    //     }
-    // });
-
     Suggestion.find({}, function(err, docs) {
         if(err){
             console.log(err);
@@ -26,7 +16,6 @@ router.get('/', function(req, res) {
         }
 
         res.json(docs);
-
     });
 });
 
@@ -38,7 +27,7 @@ router.post('/', function (req, res) {
         body: req.body.body,
         likes: [], dislikes: [],
         createdAt: new Date(),
-        state: "open",
+        state: "Open",
         updates: []
     });
 
@@ -51,31 +40,9 @@ router.post('/', function (req, res) {
         res.json(newSuggestion);
     });
 
-   //  suggestionHandler.createNew({
-   //      creator: req.session.username,
-   //      title: req.body.title,
-   //      body: req.body.body,
-   //  }, function(err, result){
-   //      if ( err ) {
-   //             console.error(err);
-   //             res.json(err);
-   //     }
-   //     else {
-   //         if ( result && result.insertedCount === 1 ) {
-   //             res.status(200);
-   //             res.json( { id: result.insertedIds[0] } );
-   //         }
-   //         else {
-   //             res.json(result);
-   //         }
-   //     }
-   // });
 });
 
 router.get('/states', function (req, res)  {
-    //Couldn't use the 'getCollection' function, even changing the collectionName to 'suggestionStates'
-    //It would query the 'suggestions' collection. Changed the getCollection method to accept collectionName as an argument
-    // and still didn't worked
     SuggestionState.find({}, function(err, docs) {
         if(err) {
             console.log(err);
@@ -101,21 +68,19 @@ router.get('/:id', function (req, res) {
 
 router.post('/:id', function (req, res)  {
     var suggestion = req.body;
-    suggestionHandler[suggestion.action](suggestion, function(err, docs){
-        if(err) {
-            console.log("error: " + err);
-            res.json(err);
-        }
-        else {
-            docs.username = req.session.username;
-            res.json(docs);
-        }
-    });
+    suggestionHandler[suggestion.action](suggestion, req.user.slack.username, res);
 });
 
 router.delete('/:id', function (req, res) {
-    suggestionHandler.delete(req.params.id, function(err, docs) {
-        res.json("Suggestion " + req.params.id + " deleted!");
+    Suggestion.remove({
+        _id: mongo.getObjectID(req.params.id)
+    }, function(err) {
+        if(err) {
+            console.log(err);
+            res.json(err);
+        }
+
+        res.json("item deleted!");
     });
 });
 

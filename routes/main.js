@@ -33,7 +33,6 @@ module.exports = function(app, passport) {
 	app.get('/auth/slack', passport.authenticate('slack'));
 
     app.get('/auth/slack/callback', passport.authenticate('slack', {failureRedirect: '/login' }), function(req, res) {
-        //console.log(req);
         res.redirect('/');
     });
 
@@ -44,8 +43,6 @@ module.exports = function(app, passport) {
     });
 
     app.get ('/logout', function(req, res) {
-        //req.logout();
-        // console.log(req);
         req.session.sessionID = "";
         res.redirect('/');
     });
@@ -68,11 +65,6 @@ module.exports = function(app, passport) {
 
     });
 };
-//login page by GET
-
-//login POST
-
-// module.exports = router;
 
 function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on
