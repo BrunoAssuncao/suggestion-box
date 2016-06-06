@@ -43,7 +43,7 @@ module.exports = function(app, passport) {
     });
 
     app.get ('/logout', function(req, res) {
-        req.session.sessionID = "";
+        req.logout();
         res.redirect('/');
     });
 

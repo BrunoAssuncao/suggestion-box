@@ -104,6 +104,7 @@ body {
       #textAngular button,
       #deleteWarning {
           background-color: #fff;
+          margin: 100px auto;
       }
 
       #stateForm {
@@ -210,8 +211,24 @@ body {
             text-decoration: none;
         }
 
-        ul {
+        &.navigation {
+            padding: 0;
             list-style: none;
+
+            li a {
+                display: block;
+                padding: $gutter;
+                border-left:5px solid $darkGray;
+                transition: border-color $standardDuration;
+
+                &:hover {
+                    border-left-color: $orange;
+                }
+
+                .fa {
+                    margin-right: 5px;
+                }
+            }
         }
     }
 

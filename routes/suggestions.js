@@ -22,7 +22,7 @@ router.get('/', function(req, res) {
 //SUBMIT NEW SUGGESTION
 router.post('/', function (req, res) {
     var newSuggestion = new Suggestion( {
-        creator: req.session.username,
+        creator: req.user.slack.username,
         title: req.body.title,
         body: req.body.body,
         likes: [], dislikes: [],

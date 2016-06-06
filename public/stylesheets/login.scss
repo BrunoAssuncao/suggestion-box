@@ -29,6 +29,10 @@ html, body {
           margin-bottom: 15px;
       }
 
+      .login {
+          text-align: center;
+          padding: $spacing * 2 0;
+      }
       form {
 
           max-width: 300px;
