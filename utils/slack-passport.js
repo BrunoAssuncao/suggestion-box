@@ -3,15 +3,11 @@ var User = require('../models/user');
 
 module.exports = function(passport) {
     passport.serializeUser(function(user, done) {
-        // console.log('SERIALIZE');
-        // console.log(user);
         done(null, user.id);
     });
 
     passport.deserializeUser(function(id, done) {
         User.findById(id, function(err, user) {
-            // console.log('DESERIALIZE');
-            // console.log(user);
             done(err, user);
         });
     });
@@ -19,10 +15,10 @@ module.exports = function(passport) {
     //TODO: losing session after refreshing page
     passport.use('slack', new SlackStrategy({
         // TODO: save this information in a config file
-        clientID: "4173363215.47618547495",
-        clientSecret: "3673e6d751c486f23cff36654f13cb1f",
-        callbackURL: 'http://localhost:8181/auth/slack/callback',
-        scope: "users:read"
+        clientID: process.env.SLACK_CLIENTID,
+        clientSecret: process.env.SLACK_CLIENT_SECRET,
+        callbackURL: process.env.SLACK_CALLBACK_URL,
+        scope: process.env.SLACK_SCOPE
 
     }, function(accessToken, refreshToken, profile, done){
         process.nextTick(function(){
