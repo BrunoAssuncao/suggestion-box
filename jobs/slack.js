@@ -9,9 +9,14 @@ module.exports = {
         new CronJob(process.env.SLACK_TIME_HOOK, function() {
             suggestionHandler.getMostVoted(function(err, doc){
                 if(doc && doc.score > 0) {
-                    var message = "This the top voted suggestion from last week, with a total score of " + doc.score + " - " + doc.title   + ' - ' + process.env.APP_ADDRESS + '#/suggestion/'+ doc._id;
+                    var message = "This is the top voted suggestion from last week: ";
+                    var attachement = [{
+                        "title": doc.title,
+                        "text": process.env.APP_ADDRESS + "#/suggestion/" + doc._id ,
+                        "pretext": "Score: " + doc.score
+                    }];
 
-                    slack.slackChannel(message, function(error, response, body){
+                    slack.slackChannel(message, attachement, function(error, response, body){
                         if (!error && response.statusCode == 200) {
                             console.log("success");
                         } else {
