@@ -9,7 +9,6 @@ module.exports = {
         new CronJob(process.env.SLACK_TIME_HOOK, function() {
             suggestionHandler.getMostVoted(function(err, doc){
                 if(doc && doc.score > 0) {
-                    //TODO: Save address
                     var message = "This the top voted suggestion from last week, with a total score of " + doc.score + " - " + doc.title   + ' - ' + process.env.APP_ADDRESS + '#/suggestion/'+ doc._id;
 
                     slack.slackChannel(message, function(error, response, body){
