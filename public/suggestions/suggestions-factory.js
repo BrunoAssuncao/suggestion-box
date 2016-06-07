@@ -1,6 +1,4 @@
 angular.module('suggestionbox')
-    .factory('SuggestionStates', function SuggestionStateFactory($http) {
-    })
     .factory('Suggestion', function SuggestionFactory($resource, $http) {
         return {
             suggestions: $resource( '/suggestions/:id', {id: '@_id'}, {} ),
@@ -8,7 +6,7 @@ angular.module('suggestionbox')
                 return $http.get('/suggestions/states');
             },
             getUsername: function() {
-                return $http.get('/user');
+                return $http.get('/users/currentUser');
             },
             getAdmins: function() {
                 return $http.get('/admins');

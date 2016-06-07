@@ -7,6 +7,7 @@ require('../config');
 var app = require('../app');
 var debug = require('debug')('suggestionBoxExpress:server');
 var http = require('http');
+var slack = require('../jobs/slack');
 
 /**
  * Get port from environment and store in Express.
@@ -26,6 +27,7 @@ var server = http.createServer(app);
 
 var ip = process.env.IP_ADDRESS || 'localhost';
 server.listen(port, ip);
+
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -48,6 +50,11 @@ function normalizePort(val) {
 
     return false;
 }
+
+/**
+*   Starting slack cronJob.
+*/
+slack.startJob();
 
 /**
  * Event listener for HTTP server "error" event.

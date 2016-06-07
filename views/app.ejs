@@ -23,22 +23,21 @@
         <div id="dashboard" ng-class="{visible: showDashboard}">
             <div class="col-xs-12 dashBoardSection text-center">
                 <i class="fa fa-user " id="user" aria-hidden="true">&nbsp;</i>
-                 <%= username %>. <br />
-                <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
+                 <%= username %> <br />
+
             </div>
-            <div class="col-xs-12 dashBoardSection">
-                <ul>
+                <ul class="col-xs-12 dashBoardSection navigation">
                     <li>
-                        <a href="/#/">Suggestions</a>
-                        <ul>
-                            <li>
-                                <a href="/#/new">New Suggestion</a>
-                            </li>
-                        </ul>
+                        <a href="/#/"><i class="fa fa-th-list" aria-hidden="true"></i>Suggestions</a>
+                    </li>
+                    <li>
+                        <a href="/#/new"><i class="fa fa-plus" aria-hidden="true"></i>New Suggestion</a>
+                    </li>
+                    <li>
+                        <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
                     </li>
                 </ul>
 
-            </div>
         </div>
         <div id="contentWrapper">
             <div ng-view></div>
@@ -69,11 +68,12 @@
 
 
 <script type="text/javascript" src="/javascripts/app.js"></script>
-<script type="text/javascript" src="/javascripts/routes.js"></script>
+<script type="text/javascript" src="/suggestionBox/mainCtrl.js"></script>
+<script type="text/javascript" src="/suggestions/routes.js"></script>
 <script type="text/javascript" src="/suggestions/list/suggestionListCtrl.js"></script>
 <script type="text/javascript" src="/suggestions/detail/suggestionDetailCtrl.js"></script>
 <script type="text/javascript" src="/suggestions/new/suggestionNewCtrl.js"></script>
-<script type="text/javascript" src="/javascripts/suggestions-factory.js"></script>
+<script type="text/javascript" src="/suggestions/suggestions-factory.js"></script>
 
 </body>
 </html>
