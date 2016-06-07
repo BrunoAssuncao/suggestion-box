@@ -192,7 +192,7 @@ body {
   }
 
 #dashboard {
-    background-color: $darkGray;
+    background-color: $orange;
     color: $white;
     position: fixed;
     width: $dashboardWidth;
@@ -218,11 +218,11 @@ body {
             li a {
                 display: block;
                 padding: $gutter;
-                border-left:5px solid $darkGray;
+                border-left:5px solid $orange;
                 transition: border-color $standardDuration;
 
                 &:hover {
-                    border-left-color: $orange;
+                    border-left-color: $white;
                 }
 
                 .fa {

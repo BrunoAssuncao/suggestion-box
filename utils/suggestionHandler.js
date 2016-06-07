@@ -36,13 +36,10 @@ var handler = {
         Suggestion.findOne({'_id': mongo.getObjectID(id)}, callback);
     },
     vote: function(suggestion, user, res) {
-        //console.log(suggestion);
         var like = suggestion.vote === 'like',
-        pushQuery = like ?  {"likes": user} : {"dislikes": user}, 
+        pushQuery = like ?  {"likes": user} : {"dislikes": user},
         pullQuery = like ? {"dislikes": user} : {"likes": user};
 
-        console.log("User: " + user);
-        console.log("like ? = " + like);
         Suggestion.findOneAndUpdate(
             {_id: mongo.getObjectID(suggestion._id)},
             {
@@ -55,7 +52,6 @@ var handler = {
                     console.log(err);
                     res.json(err);
                 }
-                console.log(doc);
                 res.json(doc);
             }
         );
@@ -94,7 +90,7 @@ var handler = {
                     console.log(err);
                 }
                 else {
-                    slack.slackChannel("Suggestion: " + suggestion.title + " has been updated - http://localhost:8181/#/suggestion/"+ suggestion._id, function(error, response, body){
+                    slack.slackChannel("Suggestion: " + suggestion.title + " has been updated - " + process.env.APP_ADDRESS + "/#/suggestion/"+ suggestion._id, function(error, response, body){
                         if (!error && response.statusCode == 200) {
                             console.log("success");
                         } else {
@@ -115,23 +111,9 @@ var handler = {
         });
     },
     getMostVoted: function(callback) {
-        mongo.getDb().collection('suggestions').aggregate([
-        {
-              $project : {
-                  title: "$title",
-                  body: "$body",
-                  creator: "$creator",
-                  score: { $subtract: [
-                      { $size: { "$ifNull": [ "$likes", [] ] } },
-                      { $size: { "$ifNull": [ "$dislikes", [] ] } }
-                  ] }
-              }
-          },
-          {
-              $sort: { "score":-1 }
-          }
-      ])
-      .limit(1).next(callback);
+        Suggestion.findOne({})
+        .sort('-score')
+        .exec(callback);
     }
 };
 

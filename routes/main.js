@@ -1,7 +1,7 @@
 var router = require('express').Router();
 var mongo = require('../utils/mongoUtils');
 var Admin = require('../models/admin');
-
+var apiInitializer = require('../utils/apiInitializer');
 var loginOnExchange = require('../utils/loginOnExchange');
 
 module.exports = function(app, passport) {
@@ -37,8 +37,6 @@ module.exports = function(app, passport) {
     });
 
     app.get('/user', function( req, res ) {
-        if(req.session.username !== null )
-
         res.json(req.session.username || "please login first");
     });
 
@@ -60,9 +58,7 @@ module.exports = function(app, passport) {
 
     /* GET home/app page. */
     app.get('/', isLoggedIn, function (req, res) {
-
         res.render('app', {title: 'Suggestion Box', username: req.user.slack.username || ""});
-
     });
 };
 

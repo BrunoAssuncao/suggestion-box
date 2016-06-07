@@ -1,5 +1,7 @@
 var SlackStrategy = require('passport-slack').Strategy;
+var apiInitializer = require('./apiInitializer');
 var User = require('../models/user');
+var Admin = require('../models/admin');
 
 module.exports = function(passport) {
     passport.serializeUser(function(user, done) {
@@ -12,9 +14,7 @@ module.exports = function(passport) {
         });
     });
 
-    //TODO: losing session after refreshing page
     passport.use('slack', new SlackStrategy({
-        // TODO: save this information in a config file
         clientID: process.env.SLACK_CLIENTID,
         clientSecret: process.env.SLACK_CLIENT_SECRET,
         callbackURL: process.env.SLACK_CALLBACK_URL,
@@ -31,21 +31,27 @@ module.exports = function(passport) {
                     return done(null, user);
                 }
                 else {
-                    var newUser = new User({
-                        slack: {
-                            id: profile.id,
-                            token: accessToken,
-                            username: profile.displayName
-                        },
-                        isAdmin: false
-                    });
-
-                    newUser.save(function(err) {
+                    Admin.findOne({"username": profile.displayName}, function(err, doc) {
                         if(err) {
-                            throw err;
+                            return done(err);
                         }
 
-                        return done(null, newUser);
+                        var newUser = new User({
+                            slack: {
+                                id: profile.id,
+                                token: accessToken,
+                                username: profile.displayName
+                            },
+                            isAdmin: doc ? true : false
+                        });
+
+                        newUser.save(function(err) {
+                            if(err) {
+                                throw err;
+                            }
+
+                            return done(null, newUser);
+                        });
                     });
                 }
             });

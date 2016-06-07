@@ -2,6 +2,7 @@ var router = require('express').Router();
 var mongo = require('../utils/mongoUtils');
 var suggestionHandler = require('../utils/suggestionHandler');
 var request = require('request');
+var apiInitializer = require('../utils/apiInitializer');
 var Suggestion = require('../models/suggestion');
 var SuggestionState = require('../models/state');
 var collection;

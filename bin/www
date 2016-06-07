@@ -52,6 +52,11 @@ function normalizePort(val) {
 }
 
 /**
+*   Starting slack cronJob.
+*/
+slack.startJob();
+
+/**
  * Event listener for HTTP server "error" event.
  */
 
