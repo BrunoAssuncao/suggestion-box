@@ -3,35 +3,6 @@ var slack = require('../utils/slackIntegration');
 var Suggestion = require('../models/suggestion');
 
 var handler = {
-    getSuggestions: function(callback) {
-        return mongo.getDb().collection('suggestions').aggregate([
-                {
-                    $project : {
-                        title: "$title",
-                        body: "$body",
-                        creator: "$creator",
-                        createdAt:  "$createdAt",
-                        score: { $subtract: [
-                            { $size: { "$ifNull": [ "$likes", [] ] } },
-                            { $size: { "$ifNull": [ "$dislikes", [] ] } }
-                        ] },
-                        state: "$state"
-                    }
-                }
-                ]).toArray(callback);
-
-    },
-    createNew: function(options, callback) {
-        mongo.getDb().collection('suggestions').insert({
-            creator: options.creator,
-            title: options.title,
-            body: options.body,
-            likes: [], dislikes: [],
-            createdAt: new Date(),
-            state: "open",
-            updates: []
-        }, callback );
-    },
     getSuggestion: function(id, callback) {
         Suggestion.findOne({'_id': mongo.getObjectID(id)}, callback);
     },
@@ -74,9 +45,6 @@ var handler = {
                 res.json(doc);
             }
         );
-
-        //this.getSuggestion(suggestion._id, callback);
-
     },
     update: function(suggestion, user, res) {
         Suggestion.findOneAndUpdate(
@@ -102,8 +70,6 @@ var handler = {
                 }
             }
         );
-
-        // this.getSuggestion(suggestion._id, callback);
     },
     delete: function(id) {
         Suggestion.findOneAndRemove({
