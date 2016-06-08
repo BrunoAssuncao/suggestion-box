@@ -10,10 +10,7 @@ angular.module('suggestionbox')
         })
         .then(Suggestion.getUsername().success(function(data) {
             $scope.username = data;
-        }) )
-        .then(Suggestion.getAdmins().success( function(data) {
-            $scope.isAdmin = data.indexOf($scope.username) > -1;
-        }));
+        }) );
 
         $scope.hasSuggestions = function() {
             return $scope.suggestions.length > 0;
