@@ -18,10 +18,15 @@ module.exports = function(passport) {
         clientID: process.env.SLACK_CLIENTID,
         clientSecret: process.env.SLACK_CLIENT_SECRET,
         callbackURL: process.env.SLACK_CALLBACK_URL,
-        scope: process.env.SLACK_SCOPE
+        scope: process.env.SLACK_SCOPE,
+        extendedUserProfile: true
 
     }, function(accessToken, refreshToken, profile, done){
         process.nextTick(function(){
+            if(profile._json.team_id !== process.env.SLACK_TEAM_ID){
+                return done(null, false);
+            }
+
             User.findOne({'slack.id': profile.id}, function(err, user){
                 if(err) {
                     return done(err);

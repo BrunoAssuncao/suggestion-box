@@ -10,6 +10,7 @@ var suggestionsRouter = require('./routes/suggestions');
 var usersRouter = require('./routes/users');
 var slack = require('./jobs/slack');
 var mongoose = require('mongoose');
+var flash = require('connect-flash');
 var app = express();
 require('./config');
 
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'suggestion_$£cr3T' }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
 app.use('/suggestions', suggestionsRouter);
 app.use('/users', usersRouter);
