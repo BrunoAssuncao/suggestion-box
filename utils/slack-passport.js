@@ -24,7 +24,7 @@ module.exports = function(passport) {
     }, function(accessToken, refreshToken, profile, done){
         process.nextTick(function(){
             if(profile._json.team_id !== process.env.SLACK_TEAM_ID){
-                return done(null, false);
+                return done(null, false, {message: "Please sign in to NearTeam"});
             }
 
             User.findOne({'slack.id': profile.id}, function(err, user){

@@ -6,7 +6,7 @@ var loginOnExchange = require('../utils/loginOnExchange');
 
 module.exports = function(app, passport) {
     app.get('/login', function (req, res) {
-        res.render('login', {title: 'Suggestion Box', title2: 'Please Log In', redirectTo: req.session.destinationUrl || "/" });
+        res.render('login', {title: 'Suggestion Box', title2: 'Please Log In', message: req.flash('error'), redirectTo: req.session.destinationUrl || "/" });
     });
 
     // app.post('/login', function(req, res) {
@@ -32,7 +32,7 @@ module.exports = function(app, passport) {
 
 	app.get('/auth/slack', passport.authenticate('slack'));
 
-    app.get('/auth/slack/callback', passport.authenticate('slack', {failureRedirect: '/login' }), function(req, res) {
+    app.get('/auth/slack/callback', passport.authenticate('slack', {failureRedirect: '/login', failureFlash: true }), function(req, res) {
         res.redirect('/');
     });
 

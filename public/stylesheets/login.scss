@@ -32,6 +32,10 @@ html, body {
       .login {
           text-align: center;
           padding: $spacing * 2 0;
+
+          .errorMessage {
+              margin: $spacing 0;
+          }
       }
       form {
 
