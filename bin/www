@@ -14,7 +14,7 @@ var slack = require('../jobs/slack');
  */
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-
+console.log(app.get('env'));
 /**
  * Create HTTP server.
  */
