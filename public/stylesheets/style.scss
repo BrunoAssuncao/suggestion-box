@@ -101,7 +101,10 @@ body {
           margin: $gutter 0;
       }
 
-      #textAngular button,
+      #textAngular button {
+          background-color: #fff;
+      }
+
       #deleteWarning {
           background-color: #fff;
           margin: 100px auto;
