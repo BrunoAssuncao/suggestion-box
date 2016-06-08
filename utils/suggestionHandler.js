@@ -58,7 +58,14 @@ var handler = {
                     console.log(err);
                 }
                 else {
-                    slack.slackChannel("Suggestion: " + suggestion.title + " has been updated - " + process.env.APP_ADDRESS + "/#/suggestion/"+ suggestion._id, {},  function(error, response, body){
+
+                    slack.slackChannel("Suggestion: " + suggestion.title + " was updated",
+                    [{
+                        "title": "by " + suggestion.update.user,
+                        "text": suggestion.update.body,
+                        "pretext": process.env.APP_ADDRESS + "#/suggestion/"+ suggestion._id
+                    }],
+                    function(error, response, body){
                         if (!error && response.statusCode == 200) {
                             console.log("success");
                         } else {
